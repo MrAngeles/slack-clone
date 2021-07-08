@@ -49,7 +49,7 @@ function Sidebar() {
         <SidebarOption
           key={doc.id}
           id={doc.id}
-          addChannelOption
+          
           title={doc.data().name}
         />
       ))}
@@ -103,7 +103,7 @@ const SidebarInfo = styled.div`
     font-weight: 400;
     align-items: center;
   }
-
+  
   > h3 > .MuiSvgIcon-root {
     font-size: 14px;
     margin-top: 1px;

@@ -18,7 +18,7 @@ import { db } from "../firebase";
 
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
-  const [channels, loading, error] = useCollection(db.collection("rooms"));
+  const [channels] = useCollection(db.collection("rooms"));
   return (
     <SidebarContainer>
       <SidebarHeader>

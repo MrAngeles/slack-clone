@@ -4,19 +4,27 @@ import { Avatar } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase";
+// import { useAuthState } from "react-firebase-hooks/auth";
+// import { auth } from "../firebase";
+import { useHistory } from 'react-router-dom'; 
 
-function Header() {
+function Header(props) {
 
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
+
+  let history = useHistory ();
+
+  const signOutHandleClick = () => {
+      props.setLogin()
+      history.push('/login')
+  }
 
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderAvatar onClick={() => auth.signOut()}
-          alt={user?.displayName}
-          src={user?.photoURL}
+        <HeaderAvatar onClick={signOutHandleClick}
+          // alt={user?.displayName}
+          // src={user?.photoURL}
         />
         <AccessTimeIcon />
       </HeaderLeft>

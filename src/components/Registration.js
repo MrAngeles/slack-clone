@@ -28,21 +28,19 @@ function Registration(props) {
         }
 
         var config = {
-        method: 'post',
-        url: 'http://206.189.91.54//api/v1/auth/',
-        headers: { 'Content-Type': 'application/json', 'crossDomain': true, 'Accept': 'application/json'},
-        data : JSON.stringify(data)
+            method: 'post',
+            url: 'http://206.189.91.54//api/v1/auth/',
+            headers: { 'Content-Type': 'application/json', 'crossDomain': true, 'Accept': 'application/json'},
+            data : JSON.stringify(data)
         };
 
         axios(config)
         .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        return response
-        // console.log(status)
+            console.log(response)
         })
         .then(result => console.log(result))
-        .catch(function (error) {
-        console.log(error);
+        .catch(response => {
+            console.log(response.response.data.errors.full_messages[0]);
         });
 
        
@@ -52,7 +50,6 @@ function Registration(props) {
         const newUser = {...user}
         newUser[e.target.id] = e.target.value
         setUser(newUser)
-        // console.log(newUser)
     }
 
 

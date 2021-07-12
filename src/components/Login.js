@@ -1,31 +1,134 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from "styled-components";
 import { Button } from '@material-ui/core';
-import { auth, provider } from '../firebase';
+// import { auth, provider } from '../firebase';
+import { useHistory } from 'react-router-dom'; 
+import axios from 'axios'
 
-function Login() {
+function Login(props) {
 
-const signIn = e => {
-    e.preventDefault();
-    auth.signInWithPopup(provider).catch((error) => alert(error.message));
 
-};
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    })
+
+    const submit = (e) => {
+        e.preventDefault()
+
+        var data = {
+            email: user.email,
+            password: user.password
+        }
+
+        var config = {
+            method: 'post',
+            url: 'http://206.189.91.54//api/v1/auth/sign_in',
+            headers: { 'Content-Type': 'application/json', 'crossDomain': true, 'Accept': 'application/json' },
+            data : data
+        };
+          
+          axios(config)
+          .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            props.setLogin(JSON.stringify(response.data))
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+    }
+
+
+    const inputChangeHandler = (e) => {
+        const loginUser = {...user}
+        loginUser[e.target.id] = e.target.value
+        setUser(loginUser)
+        console.log(loginUser)
+    }
+
+    // const signIn = e => {
+    //     e.preventDefault();
+    //     auth.signInWithPopup(provider).catch((error) => alert(error.message));
+
+    // };
+
+    let history = useHistory ();
+
+    const signUpHandleClick = () => {
+        props.setRegister(true)
+        history.push('/registration');
+    }  
+    
+
+
     return <LoginContainer>
-        <LoginInnerContainer>
+    <LoginInnerContainer>
             <img src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
             alt=""
             />
             <h1>Sign in to the Page</h1>
-            <p>clone.slack.com</p>
-
-            <Button onClick={signIn}>
-                Sign in with Google
-            </Button>
+            <p>Slack Project</p>
+            <form onSubmit={submit} autoComplete="new-password">
+                <LoginInputContainer>
+                    <input onChange={(e) => inputChangeHandler(e)} type="email" placeholder="Email" id="email" autoComplete="off"/>
+                    <input onChange={(e) => inputChangeHandler(e)} type="password" placeholder="Password" id="password" autoComplete="off"/>
+                </LoginInputContainer>
+                <LoginButtonContainer>
+                    <Button type="submit">
+                        Sign In 
+                    </Button>
+                    <Button onClick={signUpHandleClick}>
+                        Sign Up
+                    </Button>
+                </LoginButtonContainer>
+            </form>
+            
         </LoginInnerContainer>
     </LoginContainer>;
 }
 
 export default Login
+
+
+const LoginInputContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 4vh;
+
+    >input {
+        font-size:18px;
+        padding:10px 10px 10px 5px;
+        display:block;
+        width:40vh;
+        border:none;
+        border-bottom:1px solid #757575;
+        margin: 10px
+    }
+
+    input:focus{ 
+        outline:none; 
+    }
+
+`
+
+const LoginButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    
+    >button {
+        margin-bottom: 10px;
+        width: 42vh;
+        text-transform: inherit !important;
+        background-color: #0a8d48 !important;
+        color: white;
+    }
+`;
+
+
 
 
 const LoginContainer = styled.div`
@@ -49,11 +152,6 @@ const LoginInnerContainer = styled.div`
         margin-bottom: 40px;
     }
     
-    >button {
-        margin-top: 50px;
-        text-transform: inherit !important;
-        background-color: #0a8d48 !important;
-        color: white;
-    }
+   
 `;
 

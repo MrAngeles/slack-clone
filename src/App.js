@@ -9,7 +9,6 @@ import Chat from "./components/Chat";
 // import { auth } from "./firebase";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
-import Main from "./components/Main";
 // import Spinner from "react-spinkit";
 //does it work?
 

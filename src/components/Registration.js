@@ -14,8 +14,8 @@ function Registration(props) {
     let history = useHistory ();
 
     const signInHandleClick = () => {
-        props.setRegister(false)
-        history.push('/login');
+        // props.setRegister(false)
+        history.push('/');
     }  
 
     const submit = (e) => {

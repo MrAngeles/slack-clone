@@ -53,7 +53,6 @@ const HeaderSearch = styled.div`
   margin-right: 79px;
   color: #d9d2da;
   border: 1px #674a68 solid;
-
   > input {
     background-color: transparent;
     border: none;

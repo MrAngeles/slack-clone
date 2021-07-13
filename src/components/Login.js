@@ -4,14 +4,18 @@ import { Button } from '@material-ui/core';
 // import { auth, provider } from '../firebase';
 import { useHistory } from 'react-router-dom'; 
 import axios from 'axios'
+import { setUserSession } from '../Utils/Common';
 
 function Login(props) {
 
+    let history = useHistory();
 
     const [user, setUser] = useState({
         email: '',
         password: ''
     })
+
+    const [error, setError] = useState(null)
 
     const submit = (e) => {
         e.preventDefault()
@@ -29,12 +33,17 @@ function Login(props) {
         };
           
           axios(config)
-          .then(function (response) {
+          .then( response => {
             // console.log(JSON.stringify(response.data));
-            props.setLogin(JSON.stringify(response.data))
+            setUserSession(response.data)
+            // props.setLogin(JSON.stringify(response.data))
+           history.push('/main')
           })
-          .catch(function (error) {
-            console.log(error);
+          .catch(error => {
+              console.log(error.response.data.errors[0])
+              setError(error.response.data.errors[0])
+              return error
+            
           });
 
     }
@@ -53,12 +62,14 @@ function Login(props) {
 
     // };
 
-    let history = useHistory ();
-
     const signUpHandleClick = () => {
-        props.setRegister(true)
         history.push('/registration');
     }  
+
+    const errorStyle = {
+        color: 'red',
+        marginBottom: '20px'
+    }
     
 
 
@@ -74,6 +85,7 @@ function Login(props) {
                     <input onChange={(e) => inputChangeHandler(e)} type="email" placeholder="Email" id="email" autoComplete="off"/>
                     <input onChange={(e) => inputChangeHandler(e)} type="password" placeholder="Password" id="password" autoComplete="off"/>
                 </LoginInputContainer>
+                { error && <div style={errorStyle}>{error}</div>}
                 <LoginButtonContainer>
                     <Button type="submit">
                         Sign In 
@@ -89,6 +101,8 @@ function Login(props) {
 }
 
 export default Login
+
+
 
 
 const LoginInputContainer = styled.div`

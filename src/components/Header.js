@@ -4,19 +4,19 @@ import { Avatar } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import { useHistory } from 'react-router-dom'; 
+import { removeUserSession } from "../Utils/Common";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { auth } from "../firebase";
-import { useHistory } from 'react-router-dom'; 
-
 function Header(props) {
 
+
+  let history = useHistory();
   // const [user] = useAuthState(auth);
 
-  let history = useHistory ();
-
   const signOutHandleClick = () => {
-      props.setLogin()
-      history.push('/login')
+      history.push('/')
+      removeUserSession()
   }
 
   return (

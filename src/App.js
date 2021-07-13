@@ -13,6 +13,7 @@ import Registration from "./components/Registration";
 //does it work?
 
 function App() {
+
   const [login, setLogin] = useState({email: "", password:""});
   const [register, setRegister] = useState(false)
 
@@ -35,32 +36,22 @@ function App() {
   //   )
   // }
   return (
+    
     <div className="app">
       <Router>
-        {
-        register ? (
-          <Route>
-            <Registration setRegister={setRegister}/>
-          </Route>
-        ) :
-          
-        !login ? (
-          <Route>
-            <Login path="/login" exact setRegister={setRegister} setLogin={setLogin}/>
-          </Route>
-        ) : (
-            <>
-            <Header setLogin={setLogin}/>
-            <AppBody>
-              <Sidebar />
-              <Switch>
-                <Route>
-                  <Chat path="/chat" exact/>
-                </Route>
-              </Switch>
-            </AppBody>
-          </>
-        )}
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/registration" exact component={Registration} />
+            <Route>
+              <Header path="/main"/>
+              <AppBody>
+                  <Sidebar/>
+                    <Route>
+                        <Chat path="/chat" exact/>
+                    </Route>
+              </AppBody>
+            </Route>
+          </Switch>
       </Router>
     </div>
   );
@@ -98,4 +89,5 @@ const AppBody = styled.div`
   display: flex;
   height: 100vh;
 `;
+
 

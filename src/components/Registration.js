@@ -12,11 +12,18 @@ function Registration(props) {
     password_confirmation: "",
   });
 
+  // const url = "http://206.189.91.54//api/v1/auth/"
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+
   let history = useHistory();
 
   const signInHandleClick = () => {
-    props.setRegister(false);
-    history.push("/login");
+    // props.setRegister(false)
+    history.push("/");
   };
 
   const submit = (e) => {
@@ -57,46 +64,29 @@ function Registration(props) {
 
   return (
     <div>
-      <RegistrationContainer>
-        <RegistrationInnerContainer>
-          <img
-            src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-            alt=""
-          />
-
-          <h1>Sign up to Slack</h1>
-          <p>Join Slack now!</p>
-
-          <form onSubmit={(e) => submit(e)}>
-            <RegistrationInputContainer>
-              <input
-                onChange={(e) => inputChangeHandler(e)}
-                type="email"
-                placeholder="Email"
-                id="email"
-              />
-              <input
-                onChange={(e) => inputChangeHandler(e)}
-                type="password"
-                placeholder="Password"
-                id="password"
-              />
-              <input
-                onChange={(e) => inputChangeHandler(e)}
-                type="password"
-                placeholder="confirm Password"
-                id="password_confirmation"
-              />
-              <RegistrationButtonContainer>
-                <Button>Sign in</Button>
-                <Button onClick={signInHandleClick}>
-                  Already have an account
-                </Button>
-              </RegistrationButtonContainer>
-            </RegistrationInputContainer>
-          </form>
-        </RegistrationInnerContainer>
-      </RegistrationContainer>
+      <h1>Registration</h1>
+      <form onSubmit={(e) => submit(e)}>
+        <input
+          onChange={(e) => inputChangeHandler(e)}
+          type="email"
+          placeholder="Email"
+          id="email"
+        />
+        <input
+          onChange={(e) => inputChangeHandler(e)}
+          type="password"
+          placeholder="Password"
+          id="password"
+        />
+        <input
+          onChange={(e) => inputChangeHandler(e)}
+          type="password"
+          placeholder="confirm Password"
+          id="password_confirmation"
+        />
+        <button>Submit</button>
+        <button onClick={signInHandleClick}>Already have an account</button>
+      </form>
     </div>
   );
 }

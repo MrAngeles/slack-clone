@@ -13,10 +13,8 @@ import Registration from "./components/Registration";
 //does it work?
 
 function App() {
-  const [login, setLogin] = useState({email: "", password:""});
-  const [register, setRegister] = useState(false)
-
- 
+  const [login, setLogin] = useState({ email: "", password: "" });
+  const [register, setRegister] = useState(false);
 
   // if (login){
   //   return (
@@ -26,8 +24,8 @@ function App() {
   //             />
 
   //             <Spinner
-  //               name="ball-spin-fade-loader"   
-  //               color="purple"           
+  //               name="ball-spin-fade-loader"
+  //               color="purple"
   //               fadeIn="none"
   //             />
   //         </AppLoadingContents>
@@ -37,25 +35,27 @@ function App() {
   return (
     <div className="app">
       <Router>
-        {
-        register ? (
+        {register ? (
           <Route>
-            <Registration setRegister={setRegister}/>
+            <Registration setRegister={setRegister} />
           </Route>
-        ) :
-          
-        !login ? (
+        ) : !login ? (
           <Route>
-            <Login path="/login" exact setRegister={setRegister} setLogin={setLogin}/>
+            <Login
+              path="/login"
+              exact
+              setRegister={setRegister}
+              setLogin={setLogin}
+            />
           </Route>
         ) : (
-            <>
-            <Header setLogin={setLogin}/>
+          <>
+            <Header setLogin={setLogin} />
             <AppBody>
               <Sidebar />
               <Switch>
                 <Route>
-                  <Chat path="/chat" exact/>
+                  <Chat path="/chat" exact />
                 </Route>
               </Switch>
             </AppBody>
@@ -68,34 +68,30 @@ function App() {
 
 export default App;
 
-const AppLoading = styled.div`
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  width: 100%;
+// const AppLoading = styled.div`
+//   display: grid;
+//   place-items: center;
+//   height: 100vh;
+//   width: 100%;
 
-`;
+// `;
 
-const AppLoadingContents = styled.div`
-    text-align: center;
-    padding-bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+// const AppLoadingContents = styled.div`
+//   text-align: center;
+//   padding-bottom: 100px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
 
-    > img {
-      height: 100px;
-      padding: 20px;
-      margin-bottom: 40px;
-      
-    }
-`;
-
-
+//   > img {
+//     height: 100px;
+//     padding: 20px;
+//     margin-bottom: 40px;
+//   }
+// `;
 
 const AppBody = styled.div`
   display: flex;
   height: 100vh;
 `;
-

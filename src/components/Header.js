@@ -6,23 +6,23 @@ import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { auth } from "../firebase";
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from "react-router-dom";
 
 function Header(props) {
-
   // const [user] = useAuthState(auth);
 
-  let history = useHistory ();
+  let history = useHistory();
 
   const signOutHandleClick = () => {
-      props.setLogin()
-      history.push('/login')
-  }
+    props.setLogin();
+    history.push("/login");
+  };
 
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderAvatar onClick={signOutHandleClick}
+        <HeaderAvatar
+          onClick={signOutHandleClick}
           // alt={user?.displayName}
           // src={user?.photoURL}
         />

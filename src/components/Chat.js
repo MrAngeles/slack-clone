@@ -11,29 +11,29 @@ import Message from "./Message";
 import GroupIcon from "@material-ui/icons/Group";
 
 function Chat() {
-  const chatRef = useRef(null);
-  const roomId = useSelector(selectRoomId);
-  const [roomDetails] = useDocument(
-    roomId && db.collection("rooms").doc(roomId)
-  );
-  const [roomMessages, loading] = useCollection(
-    roomId &&
-      db
-        .collection("rooms")
-        .doc(roomId)
-        .collection("messages")
-        .orderBy("timestamp", "asc")
-  );
+  // const chatRef = useRef(null);
+  // const roomId = useSelector(selectRoomId);
+  // const [roomDetails] = useDocument(
+  //   roomId && db.collection("rooms").doc(roomId)
+  // );
+  // const [roomMessages, loading] = useCollection(
+  //   roomId &&
+  //     db
+  //       .collection("rooms")
+  //       .doc(roomId)
+  //       .collection("messages")
+  //       .orderBy("timestamp", "asc")
+  // );
 
-  useEffect(() => {
-    chatRef?.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }, [roomId, loading]);
+  // useEffect(() => {
+  //   chatRef?.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //   });
+  // }, [roomId, loading]);
 
   return (
     <ChatContainer>
-      {roomDetails && roomMessages && (
+      {/* {roomDetails && roomMessages && ( */}
         <>
           <Header>
             <HeaderLeft>
@@ -77,7 +77,7 @@ function Chat() {
             channelId={roomId}
           />
         </>
-      )}
+      {/* )} */}
     </ChatContainer>
   );
 }

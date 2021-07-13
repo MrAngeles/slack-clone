@@ -99,8 +99,8 @@ function Login(props) {
           </LoginInputContainer>
           {error && <div style={errorStyle}>{error}</div>}
           <LoginButtonContainer>
-            <Button type="submit">Sign In</Button>
-            <Button onClick={signUpHandleClick}>Sign Up</Button>
+            <Button type="submit">Login</Button>
+            <Button onClick={signUpHandleClick}>Register</Button>
           </LoginButtonContainer>
         </form>
       </LoginInnerContainer>
@@ -147,7 +147,7 @@ const LoginButtonContainer = styled.div`
 `;
 
 const LoginContainer = styled.div`
-  background-color: #f8f8f8;
+  background-color: #d9d7d7;
   height: 100vh;
   display: grid;
   place-items: center;

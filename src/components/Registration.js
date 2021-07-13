@@ -12,6 +12,8 @@ function Registration(props) {
     password_confirmation: "",
   });
 
+  const [error, setError] = useState(null);
+
   let history = useHistory();
 
   const signInHandleClick = () => {
@@ -42,10 +44,13 @@ function Registration(props) {
     axios(config)
       .then(function (response) {
         console.log(response);
+        history.push("/");
       })
       .then((result) => console.log(result))
       .catch((response) => {
         console.log(response.response.data.errors.full_messages[0]);
+        setError(response.response.data.errors.full_messages[0])
+        return response
       });
   };
 
@@ -55,9 +60,15 @@ function Registration(props) {
     setUser(newUser);
   };
 
+  const errorStyle = {
+    color: "red",
+    marginBottom: "20px",
+  };
+
+
   return (
     <div>
-      <form onSubmit={(e) => submit(e)}>
+      
         <RegistrationContainer>
           <RegistrationInnerContainer>
             <img
@@ -66,35 +77,39 @@ function Registration(props) {
             />
             <h1>Sign up to slack</h1>
             <p>Join slack now!</p>
-            <RegistrationInputContainer>
-              <input
-                onChange={(e) => inputChangeHandler(e)}
-                type="email"
-                placeholder="Email"
-                id="email"
-              />
-              <input
-                onChange={(e) => inputChangeHandler(e)}
-                type="password"
-                placeholder="Password"
-                id="password"
-              />
-              <input
-                onChange={(e) => inputChangeHandler(e)}
-                type="password"
-                placeholder="confirm Password"
-                id="password_confirmation"
-              />
-            </RegistrationInputContainer>
-            <RegistrationButtonContainer>
-              <Button>Submit</Button>
-              <Button onClick={signInHandleClick}>
-                Already have an account
-              </Button>
-            </RegistrationButtonContainer>
+            <form onSubmit={submit}>
+              <RegistrationInputContainer>
+                <input
+                  onChange={(e) => inputChangeHandler(e)}
+                  type="email"
+                  placeholder="Email"
+                  id="email"
+                />
+                <input
+                  onChange={(e) => inputChangeHandler(e)}
+                  type="password"
+                  placeholder="Password"
+                  id="password"
+                />
+                <input
+                  onChange={(e) => inputChangeHandler(e)}
+                  type="password"
+                  placeholder="Confirm Password"
+                  id="password_confirmation"
+                />
+              </RegistrationInputContainer>
+              {error && <div style={errorStyle}>{error}</div>}
+              <RegistrationButtonContainer>
+                <Button type="submit">Register</Button>
+                <Button onClick={signInHandleClick}>
+                  Already have an account
+                </Button>
+              </RegistrationButtonContainer>
+
+            </form>
           </RegistrationInnerContainer>
         </RegistrationContainer>
-      </form>
+      
     </div>
   );
 }
@@ -129,7 +144,7 @@ const RegistrationInputContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-
+  
   > input {
     font-size: 18px;
     padding: 10px 10px 10px 5px;

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { enterRoom } from "../features/appSlice";
 import { db } from "../firebase";
-
+import GroupIcon from "@material-ui/icons/Group";
 function SidebarOption({ Icon, title, addChannelOption, id }) {
   const dispatch = useDispatch();
 
@@ -21,8 +21,9 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
     if (id) {
       dispatch(
         enterRoom({
-        roomId: id
-      }))
+          roomId: id,
+        })
+      );
     }
   };
 
@@ -35,7 +36,10 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
         <h3>{title}</h3>
       ) : (
         <SidebarOptionChannel>
-          <span>#</span> {title}
+          <span>
+            <GroupIcon style={{ marginBottom: 5 }} />
+          </span>
+          <p>{title}</p>
         </SidebarOptionChannel>
       )}
     </SidebarOptionContainer>
@@ -71,4 +75,14 @@ const SidebarOptionContainer = styled.div`
 const SidebarOptionChannel = styled.h3`
   padding: 18px 0;
   font-weight: 300;
+  align-items: center;
+
+  > p {
+    display: flex;
+    margin-top: -28px;
+    margin-left: 50px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+  }
 `;

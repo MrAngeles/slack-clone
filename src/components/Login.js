@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 // import { auth, provider } from '../firebase';
-<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { setUserSession } from "../Utils/Common";
 
 function Login(props) {
+  let history = useHistory();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState(null);
 
   const submit = (e) => {
     e.preventDefault();
@@ -32,12 +36,16 @@ function Login(props) {
     };
 
     axios(config)
-      .then(function (response) {
+      .then((response) => {
         // console.log(JSON.stringify(response.data));
-        props.setLogin(JSON.stringify(response.data));
+        setUserSession(response.data);
+        // props.setLogin(JSON.stringify(response.data))
+        history.push("/main");
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.log(error.response.data.errors[0]);
+        setError(error.response.data.errors[0]);
+        return error;
       });
   };
 
@@ -54,11 +62,13 @@ function Login(props) {
 
   // };
 
-  let history = useHistory();
-
   const signUpHandleClick = () => {
-    props.setRegister(true);
     history.push("/registration");
+  };
+
+  const errorStyle = {
+    color: "red",
+    marginBottom: "20px",
   };
 
   return (
@@ -87,117 +97,18 @@ function Login(props) {
               autoComplete="off"
             />
           </LoginInputContainer>
+          {error && <div style={errorStyle}>{error}</div>}
           <LoginButtonContainer>
-            <Button type="submit">Login</Button>
+            <Button type="submit">Sign In</Button>
             <Button onClick={signUpHandleClick}>Sign Up</Button>
           </LoginButtonContainer>
         </form>
       </LoginInnerContainer>
     </LoginContainer>
   );
-=======
-import { useHistory } from 'react-router-dom'; 
-import axios from 'axios'
-import { setUserSession } from '../Utils/Common';
-
-function Login(props) {
-
-    let history = useHistory();
-
-    const [user, setUser] = useState({
-        email: '',
-        password: ''
-    })
-
-    const [error, setError] = useState(null)
-
-    const submit = (e) => {
-        e.preventDefault()
-
-        var data = {
-            email: user.email,
-            password: user.password
-        }
-
-        var config = {
-            method: 'post',
-            url: 'http://206.189.91.54//api/v1/auth/sign_in',
-            headers: { 'Content-Type': 'application/json', 'crossDomain': true, 'Accept': 'application/json' },
-            data : data
-        };
-          
-          axios(config)
-          .then( response => {
-            // console.log(JSON.stringify(response.data));
-            setUserSession(response.data)
-            // props.setLogin(JSON.stringify(response.data))
-           history.push('/main')
-          })
-          .catch(error => {
-              console.log(error.response.data.errors[0])
-              setError(error.response.data.errors[0])
-              return error
-            
-          });
-
-    }
-
-
-    const inputChangeHandler = (e) => {
-        const loginUser = {...user}
-        loginUser[e.target.id] = e.target.value
-        setUser(loginUser)
-        console.log(loginUser)
-    }
-
-    // const signIn = e => {
-    //     e.preventDefault();
-    //     auth.signInWithPopup(provider).catch((error) => alert(error.message));
-
-    // };
-
-    const signUpHandleClick = () => {
-        history.push('/registration');
-    }  
-
-    const errorStyle = {
-        color: 'red',
-        marginBottom: '20px'
-    }
-    
-
-
-    return <LoginContainer>
-    <LoginInnerContainer>
-            <img src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-            alt=""
-            />
-            <h1>Sign in to the Page</h1>
-            <p>Slack Project</p>
-            <form onSubmit={submit} autoComplete="new-password">
-                <LoginInputContainer>
-                    <input onChange={(e) => inputChangeHandler(e)} type="email" placeholder="Email" id="email" autoComplete="off"/>
-                    <input onChange={(e) => inputChangeHandler(e)} type="password" placeholder="Password" id="password" autoComplete="off"/>
-                </LoginInputContainer>
-                { error && <div style={errorStyle}>{error}</div>}
-                <LoginButtonContainer>
-                    <Button type="submit">
-                        Sign In 
-                    </Button>
-                    <Button onClick={signUpHandleClick}>
-                        Sign Up
-                    </Button>
-                </LoginButtonContainer>
-            </form>
-            
-        </LoginInnerContainer>
-    </LoginContainer>;
->>>>>>> f183bc77a6a795865cb9f4fce7abbdc22ff6418c
 }
 
 export default Login;
-
-
 
 const LoginInputContainer = styled.div`
   display: flex;

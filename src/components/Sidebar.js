@@ -22,6 +22,9 @@ function Sidebar() {
   const [channels] = useCollection(db.collection("rooms"));
   const [user] = useAuthState(auth);
 
+  var userInfo = JSON.parse(sessionStorage.user);
+  // console.log(userInfo.data.email)
+
   return (
     <SidebarContainer>
       <SidebarHeader>
@@ -29,7 +32,7 @@ function Sidebar() {
           <h2>Group 2</h2>
           <h3>
             <FiberManualRecordIcon />
-            Warda Nur
+            {userInfo.data.email}
           </h3>
         </SidebarInfo>
         <CreateIcon />

@@ -99,7 +99,7 @@ function Login(props) {
           </LoginInputContainer>
           {error && <div style={errorStyle}>{error}</div>}
           <LoginButtonContainer>
-            <Button type="submit">Sign In</Button>
+            <Button type="submit">Login</Button>
             <Button onClick={signUpHandleClick}>Sign Up</Button>
           </LoginButtonContainer>
         </form>

@@ -29,7 +29,7 @@ function Sidebar() {
           <h2>Group 2</h2>
           <h3>
             <FiberManualRecordIcon />
-            Carl See
+            Warda Nur
           </h3>
         </SidebarInfo>
         <CreateIcon />
@@ -101,7 +101,7 @@ const SidebarInfo = styled.div`
     font-weight: 400;
     align-items: center;
   }
-  
+
   > h3 > .MuiSvgIcon-root {
     font-size: 14px;
     margin-top: 1px;

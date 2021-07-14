@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import axios from "axios";
+import { registrationUser } from "./api/Api";
 
 function Registration(props) {
   // const url = "http://206.189.91.54//api/v1/auth/"
@@ -30,25 +30,13 @@ function Registration(props) {
       password_confirmation: user.password_confirmation,
     };
 
-    var config = {
-      method: "post",
-      url: "http://206.189.91.54//api/v1/auth/",
-      headers: {
-        "Content-Type": "application/json",
-        crossDomain: true,
-        Accept: "application/json",
-      },
-      data: JSON.stringify(data),
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(response);
+    registrationUser(data)
+      .then(response => {
         history.push("/");
+        return response
       })
       .then((result) => console.log(result))
       .catch((response) => {
-        console.log(response.response.data.errors.full_messages[0]);
         setError(response.response.data.errors.full_messages[0])
         return response
       });

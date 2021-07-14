@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
@@ -8,9 +8,49 @@ import ChatInput from "./ChatInput";
 import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 import { db } from "../firebase";
 import Message from "./Message";
+import axios from "axios";
 import GroupIcon from "@material-ui/icons/Group";
 
+const loggedInUser = {
+  "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
+  client: "tdluJrvdfrqEmGV_nCLpvQ",
+  expiry: 1626966033,
+  uid: "m1@m.com",
+  id: 31,
+};
+
 function Chat() {
+  const [sendMessage, setSendMessage] = useState("");
+
+  const getMessage = ({
+    receiver_id,
+    receiver_class,
+    headers: { token, client, expiry, uid },
+  }) => {
+    return axios
+      .get("http://206.189.91.54//api/v1/messages", {
+        headers: {
+          "access-token": token,
+          client: client,
+          expiry: expiry,
+          uid: uid,
+          // "access-token": "haXWCLr264GN4T2F5qSSug",
+          // client: "_690jUPp79Ik24mMmKlQJA",
+          // expiry: "1626789364",
+          // uid: "user1@example.com",
+        },
+
+        params: {
+          receiver_id,
+          receiver_class,
+        },
+      })
+
+      .then((response) => response)
+      .then((result) => result)
+      .catch((error) => error);
+  };
+
   // const chatRef = useRef(null);
   // const roomId = useSelector(selectRoomId);
   // const [roomDetails] = useDocument(
@@ -26,57 +66,59 @@ function Chat() {
   // );
 
   // useEffect(() => {
-  //   chatRef?.current?.scrollIntoView({
+  //   Chat?.current?.scrollIntoView({
   //     behavior: "smooth",
   //   });
+  // });
   // }, [roomId, loading]);
 
   return (
     <ChatContainer>
       {/* {roomDetails && roomMessages && ( */}
-        <>
-          <Header>
-            <HeaderLeft>
-              <h4>
-                <strong>
-                  <GroupIcon />
-                  {roomDetails?.data().name}
-                </strong>
-              </h4>
-              <StarBorderOutlinedIcon />
-            </HeaderLeft>
+      <>
+        <Header>
+          <HeaderLeft>
+            <h4>
+              <strong>
+                <GroupIcon />
+                {/* {roomDetails?.data().name} */}
+              </strong>
+            </h4>
+            <StarBorderOutlinedIcon />
+          </HeaderLeft>
 
-            <HeaderRight>
-              <p>
-                <InfoOutlinedIcon /> Details
-              </p>
-            </HeaderRight>
-          </Header>
+          <HeaderRight>
+            <p>
+              <InfoOutlinedIcon /> Details
+            </p>
+          </HeaderRight>
+        </Header>
 
-          <ChatMessages>
-            {roomMessages?.docs.map((doc) => {
-              const { message, timestamp, user, userImage } = doc.data();
+        <ChatMessages>
+          {/* {getMessage?.docs.map((doc) => {
+            const { message, timestamp, user, userImage } = doc.data(); */}
 
-              return (
-                <Message
-                  key={doc.id}
-                  message={message}
-                  timestamp={timestamp}
-                  user={user}
-                  userImage={userImage}
-                />
-              );
-            })}
-            <ChatBottom ref={chatRef} />
-          </ChatMessages>
-
-          <ChatInput
-            //Channel Name
-            chatRef={chatRef}
-            channelName={roomDetails?.data().name}
-            channelId={roomId}
+          {/* return ( */}
+          <Message
+          // key={doc.id}
+          // message={message}
+          // timestamp={timestamp}
+          // user={user}
+          // userImage={userImage}
+          // onChange={handleSendMessageChange}
           />
-        </>
+          {/* ); */}
+          {/* })} */}
+          <ChatBottom ref={Chat} />
+        </ChatMessages>
+
+        <ChatInput
+        //Channel Name
+        // chatRef={Chat}
+        // channelName={getMessage?.data().name}
+        // channelId={Chat}
+        />
+      </>
       {/* )} */}
     </ChatContainer>
   );

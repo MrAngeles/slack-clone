@@ -16,11 +16,19 @@ import SidebarOption from "./SidebarOption";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { listOfAllUsers } from "./api/Api";
 
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
   const [channels] = useCollection(db.collection("rooms"));
   const [user] = useAuthState(auth);
+
+  var userInfo = JSON.parse(sessionStorage.user);
+  listOfAllUsers(userInfo.headers)
+  .then(response => response)
+  .then(result => console.log(result.data))
+  .catch(error => error)
+  // console.log(userInfo.headers)
 
   return (
     <SidebarContainer>
@@ -29,7 +37,7 @@ function Sidebar() {
           <h2>Group 2</h2>
           <h3>
             <FiberManualRecordIcon />
-            Warda Nur
+            {userInfo.data.email}
           </h3>
         </SidebarInfo>
         <CreateIcon />

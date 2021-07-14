@@ -7,8 +7,9 @@ export const getUser = () => {
     }
 }
 
-export const setUserSession = (user) => {
-    sessionStorage.setItem("user", JSON.stringify(user))
+export const setUserSession = (response) => {
+    sessionStorage.setItem("user", JSON.stringify(response))
+    // sessionStorage.setItem("headers", JSON.stringify(headers))
 }
 
 export const removeUserSession = () => {

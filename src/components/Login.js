@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Button } from "@material-ui/core";
 // import { auth, provider } from '../firebase';
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { setUserSession } from "../Utils/Common";
+import { loginUser } from "./api/Api";
 
 function Login(props) {
   let history = useHistory();
@@ -24,22 +25,12 @@ function Login(props) {
       password: user.password,
     };
 
-    var config = {
-      method: "post",
-      url: "http://206.189.91.54//api/v1/auth/sign_in",
-      headers: {
-        "Content-Type": "application/json",
-        crossDomain: true,
-        Accept: "application/json",
-      },
-      data: data,
-    };
-
-    axios(config)
+    loginUser(data)
       .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        setUserSession(response.data);
-        // props.setLogin(JSON.stringify(response.data))
+        setUserSession(response);
+        // console.log(response)
+        // var userInfo = JSON.parse(sessionStorage.user);
+        // console.log(userInfo.data.email)
         history.push("/main");
       })
       .catch((error) => {
@@ -55,12 +46,6 @@ function Login(props) {
     setUser(loginUser);
     console.log(loginUser);
   };
-
-  // const signIn = e => {
-  //     e.preventDefault();
-  //     auth.signInWithPopup(provider).catch((error) => alert(error.message));
-
-  // };
 
   const signUpHandleClick = () => {
     history.push("/registration");

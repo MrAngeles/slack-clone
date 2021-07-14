@@ -27,8 +27,8 @@ function Login(props) {
 
     loginUser(data)
       .then((response) => {
-        setUserSession(response.data);
-        console.log(response.data)
+        setUserSession(response);
+        // console.log(response)
         // var userInfo = JSON.parse(sessionStorage.user);
         // console.log(userInfo.data.email)
         history.push("/main");

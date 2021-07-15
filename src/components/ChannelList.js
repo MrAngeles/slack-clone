@@ -30,7 +30,6 @@ fetch(`http://206.189.91.54//api/v1/channels`, requestOptions)
 })
 .then(data => {
     setChannels(data);
-    console.log(data)
     setIsPending(false);
     setError(null);
 })
@@ -39,8 +38,9 @@ fetch(`http://206.189.91.54//api/v1/channels`, requestOptions)
     setError(error);
 })
 
-}, [])
-console.log(channels);
+}, [channels])
+
+
   return (
     <div>
       { error && <div>{ error }</div> }
@@ -48,7 +48,7 @@ console.log(channels);
       { !isPending && channels.data.map((channel, index) => (
         <div className='channels-preview' key={index}>
           <div className="mychannels">
-            <h5>{channel.name}</h5>
+          <Link to={`/main/channel/${channel.id}`}> {channel.name} </Link>
                </div>
         </div>
 ))

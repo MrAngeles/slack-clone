@@ -8,6 +8,7 @@ import Chat from "./components/Chat";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
 import CreateChannel from "./components/CreateChannel";
+import ChannelDetails from "./components/ChannelDetails";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           <Route path="/" exact component={Login} />
           <Route path="/registration" exact component={Registration} />
           <Route path="/test" component={CreateChannel} />
+          <Route path="/main/channel/:id">
+              <ChannelDetails />
+              </Route>
           <Route>
             <Header path="/main" />
             <AppBody>
@@ -24,6 +28,7 @@ function App() {
               <Route>
                 <Chat path="/chat" exact />
               </Route>
+              
             </AppBody>
           </Route>
         </Switch>

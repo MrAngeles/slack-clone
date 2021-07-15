@@ -1,83 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import { useSelector } from "react-redux";
-import { selectRoomId } from "../features/appSlice";
 import ChatInput from "./ChatInput";
-import { useCollection, useDocument } from "react-firebase-hooks/firestore";
-import { db } from "../firebase";
-import Message from "./Message";
 import GroupIcon from "@material-ui/icons/Group";
 
 function Chat() {
-  const chatRef = useRef(null);
-  const roomId = useSelector(selectRoomId);
-  const [roomDetails] = useDocument(
-    roomId && db.collection("rooms").doc(roomId)
-  );
-  const [roomMessages, loading] = useCollection(
-    roomId &&
-      db
-        .collection("rooms")
-        .doc(roomId)
-        .collection("messages")
-        .orderBy("timestamp", "asc")
-  );
-
-  useEffect(() => {
-    chatRef?.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }, [roomId, loading]);
-
   return (
     <ChatContainer>
-      {roomDetails && roomMessages && (
-        <>
-          <Header>
-            <HeaderLeft>
-              <h4>
-                <strong>
-                  <GroupIcon />
-                  {roomDetails?.data().name}
-                </strong>
-              </h4>
-              <StarBorderOutlinedIcon />
-            </HeaderLeft>
+      <Header>
+        <HeaderLeft>
+          <GroupIcon />
+          <strong>Chat Name</strong>
+          <StarBorderOutlinedIcon />
+        </HeaderLeft>
+      </Header>
 
-            <HeaderRight>
-              <p>
-                <InfoOutlinedIcon /> Details
-              </p>
-            </HeaderRight>
-          </Header>
+      <ChatMessages />
 
-          <ChatMessages>
-            {roomMessages?.docs.map((doc) => {
-              const { message, timestamp, user, userImage } = doc.data();
-
-              return (
-                <Message
-                  key={doc.id}
-                  message={message}
-                  timestamp={timestamp}
-                  user={user}
-                  userImage={userImage}
-                />
-              );
-            })}
-            <ChatBottom ref={chatRef} />
-          </ChatMessages>
-
-          <ChatInput
-            //Channel Name
-            chatRef={chatRef}
-            channelName={roomDetails?.data().name}
-            channelId={roomId}
-          />
-        </>
-      )}
+      <ChatInput />
     </ChatContainer>
   );
 }
@@ -90,8 +30,9 @@ const ChatBottom = styled.div`
 
 const Header = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  /* padding: 20px; */
   border-bottom: 1px solid lightgray;
 `;
 
@@ -99,6 +40,14 @@ const ChatMessages = styled.div``;
 
 const HeaderLeft = styled.div`
   display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  > strong {
+    margin-inline: 1rem;
+  }
+
+  /* display: flex;
   align-items: center;
   margin-top: -20px !important;
 
@@ -116,27 +65,13 @@ const HeaderLeft = styled.div`
     margin-bottom: -7px !important;
     margin-left: 10px;
     margin-right: 5px;
-  }
-`;
-
-const HeaderRight = styled.div`
-  > p {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin-top: -10px !important;
-  }
-
-  > p > .MuiSvgIcon-root {
-    margin-right: 5px !important;
-    font-size: 16px;
-    margin-top: 0px !important;
-  }
+  } */
 `;
 
 const ChatContainer = styled.div`
-  flex: 0.7;
-  flex-grow: 1;
-  overflow-y: scroll;
-  margin-top: 60px;
+  grid-area: 2/2/3/3;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 `;

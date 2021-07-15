@@ -1,45 +1,43 @@
-import React, { useState } from "react";
-import "./App.css";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
 import styled from "styled-components";
-import Chat from "./components/Chat";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
 import CreateChannel from "./components/CreateChannel";
+<<<<<<< HEAD
+// import Main from "./components/Main";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Chat from "./components/Chat";
+import Home from "./components/Home";
+=======
 import ChannelDetails from "./components/ChannelDetails";
+>>>>>>> f8b150abebd81140fea86ca1d35098c01f32df41
 
 function App() {
   return (
-    <div className="app">
+    <StyledApp>
       <Router>
+        <Header />
+        <Sidebar />
         <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/registration" exact component={Registration} />
-          <Route path="/test" component={CreateChannel} />
-          <Route path="/main/channel/:id">
-              <ChannelDetails />
-              </Route>
-          <Route>
-            <Header path="/main" />
-            <AppBody>
-              <Sidebar />
-              <Route>
-                <Chat path="/chat" exact />
-              </Route>
-              
-            </AppBody>
-          </Route>
+          <Route path="/registration" component={Registration} />
+          <Route path="/carl-test" component={CreateChannel} />
+          <Route path="/login" component={Login} />
+          <Route path="/group" component={Chat} />
+          <Route path="/dm" component={Chat} />
+          <Route path="/" component={Home} exact />
         </Switch>
       </Router>
-    </div>
+    </StyledApp>
   );
 }
 
 export default App;
 
-const AppBody = styled.div`
-  display: flex;
-  height: 100vh;
+const StyledApp = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template: auto 1fr / auto 1fr;
 `;

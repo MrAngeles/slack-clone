@@ -17,6 +17,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { listOfAllUsers } from "./api/Api";
+import ChannelList from "./ChannelList";
 
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
@@ -53,6 +54,7 @@ function Sidebar() {
       <SidebarOption Icon={ExpandLessIcon} title="Show less" />
       <hr />
       <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
+      <ChannelList />
       <hr />
       <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel" />
 

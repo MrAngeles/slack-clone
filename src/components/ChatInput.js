@@ -10,6 +10,7 @@ const loggedInUser = {
   uid: "m1@m.com",
   id: 31,
 };
+
 const url = "http://206.189.91.54//api/v1/messages";
 
 function ChatInput({ channelName, channelId, chatRef }) {

@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import ChatInput from "./ChatInput";
 import GroupIcon from "@material-ui/icons/Group";
+import { userContext } from "../context/userContext";
 
-function Chat() {
+function Chat(props) {
+  const state = useContext(userContext)[0];
+  console.log(props);
+  const channelName = props.match.params.name;
+  const channelId = props.match.params.id;
   return (
     <ChatContainer>
       <Header>
         <HeaderLeft>
           <GroupIcon />
-          <strong>Chat Name</strong>
+          <strong>{channelName}</strong>
           <StarBorderOutlinedIcon />
         </HeaderLeft>
       </Header>

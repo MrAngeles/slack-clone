@@ -53,8 +53,8 @@ function CreateChannel() {
           autoComplete="off"
         />
         <button type="submit">submit</button>
+        <ChannelList />
       </form>
-      <ChannelList />
     </>
   );
 }

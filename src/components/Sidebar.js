@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
@@ -13,17 +13,15 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarOption from "./SidebarOption";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { auth, db } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { listOfAllUsers } from "./api/Api";
 import ChannelList from "./ChannelList";
 import CreateChannel from "./CreateChannel";
+import { userContext } from "../context/userContext";
+import SidebarLink from "./SidebarLink";
 
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
-  const [channels] = useCollection(db.collection("rooms"));
-  const [user] = useAuthState(auth);
+  const contextUser = useContext(userContext)[0];
 
   // var userInfo = JSON.parse(sessionStorage.user);
   // listOfAllUsers(userInfo.headers)
@@ -32,41 +30,52 @@ function Sidebar() {
   //   .catch(error => error);
   // // console.log(userInfo.headers)
 
-  return <NoSibebar />;
+  if (!contextUser) {
+    return <NoSibebar />;
+  }
 
   return (
-    <SidebarContainer>
-      <SidebarHeader>
-        <SidebarInfo>
-          <h2>Group 2</h2>
-          <h3>
-            <FiberManualRecordIcon />
-            {/* {userInfo.data.email} */}
-            hagaga
-          </h3>
-        </SidebarInfo>
-        <CreateIcon />
-      </SidebarHeader>
+    <StyledDiv>
+      <SidebarContainer>
+        <SidebarHeader>
+          <SidebarInfo>
+            <h2>Group 2</h2>
+            <h3>
+              <FiberManualRecordIcon />
+              {contextUser.uid}
+            </h3>
+          </SidebarInfo>
+          <CreateIcon />
+        </SidebarHeader>
 
-      <SidebarOption Icon={InsertCommentIcon} title="Thread" />
-      <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
-      <SidebarOption Icon={DraftsIcon} title="Saved items" />
-      <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
-      <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
-      <SidebarOption Icon={AppsIcon} title="Apps" />
-      <SidebarOption Icon={FileCopyIcon} title="File browser" />
-      <SidebarOption Icon={ExpandLessIcon} title="Show less" />
-      <hr />
-      <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
-      <CreateChannel />
-      <ChannelList />
-      <hr />
-      <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel" />
+        <SidebarOption Icon={InsertCommentIcon} title="Thread" />
+        <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
+        <SidebarOption Icon={DraftsIcon} title="Saved items" />
+        <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
+        <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
+        <SidebarOption Icon={AppsIcon} title="Apps" />
+        <SidebarOption Icon={FileCopyIcon} title="File browser" />
+        <SidebarOption Icon={ExpandLessIcon} title="Show less" />
+        <hr />
+        <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
+        {/* <CreateChannel /> */}
+        <hr />
+        <SidebarOption
+          Icon={AddIcon}
+          to="/add-channel"
+          addChannelOption
+          title="Add Channel"
+        />
+        <ChannelList />
+        <SidebarLink id={31} title="Dog" />
+        <SidebarLink id={33} title="Cat" />
+        <SidebarLink id={34} title="Mouse" />
 
-      {channels?.docs.map(doc => (
+        {/* {channels?.docs.map(doc => (
         <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
-      ))}
-    </SidebarContainer>
+      ))} */}
+      </SidebarContainer>
+    </StyledDiv>
   );
 }
 
@@ -76,12 +85,18 @@ function NoSibebar() {
   return <SidebarContainer></SidebarContainer>;
 }
 
-const SidebarContainer = styled.div`
+const StyledDiv = styled.div`
   grid-area: 2/1/3/2;
+  overflow-y: auto;
+  min-width: 200px;
+  height: 92vh;
+`;
+
+const SidebarContainer = styled.div`
+  width: 100%;
+  /* height: 100%; */
   color: white;
   background-color: var(--slack-color);
-  min-width: 200px;
-  overflow-y: auto;
 
   > hr {
     margin-top: 5px;

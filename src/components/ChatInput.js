@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import SendIcon from "@material-ui/icons/Send";
 import axios from "axios";
+import { userContext } from "../context/userContext";
 
-const loggedInUser = {
-  "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
-  client: "tdluJrvdfrqEmGV_nCLpvQ",
-  expiry: 1626966033,
-  uid: "m1@m.com",
-  id: 31
-};
+// const loggedInUser = {
+//   "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
+//   client: "tdluJrvdfrqEmGV_nCLpvQ",
+//   expiry: 1626966033,
+//   uid: "m1@m.com",
+//   id: 31
+// };
 
 const url = "http://206.189.91.54//api/v1/messages";
 
 function ChatInput({ channelName, channelId, chatRef }) {
+  const loggedInUser = useContext(userContext)[0];
   const [message, setMessage] = useState("");
 
   function handleMessageChange(e) {

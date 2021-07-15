@@ -1,5 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory
+} from "react-router-dom";
 import styled from "styled-components";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
@@ -9,22 +14,42 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
+import { userContext } from "./context/userContext";
+import { getUser } from "./Utils/Common";
 
+//first render
 function App() {
+  const [isLoading, setLoading] = useState(true);
+  const [contextUser, setContextUser] = useContext(userContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    const sessionUser = getUser();
+    if (sessionUser) {
+      setContextUser(sessionUser);
+      setLoading(false);
+    } else {
+      setLoading(false);
+      history.push("/login");
+    }
+  }, []);
+
+  if (isLoading) {
+    return <div>...loading</div>;
+  }
+
   return (
     <StyledApp>
-      <Router>
-        <Header />
-        <Sidebar />
-        <Switch>
-          <Route path="/registration" component={Registration} />
-          <Route path="/carl-test" component={CreateChannel} />
-          <Route path="/login" component={Login} />
-          <Route path="/group" component={Chat} />
-          <Route path="/dm" component={Chat} />
-          <Route path="/" component={Home} exact />
-        </Switch>
-      </Router>
+      <Header />
+      <Sidebar />
+      <Switch>
+        <Route path="/registration" component={Registration} />
+        <Route path="/add-channel" component={CreateChannel} />
+        <Route path="/login" component={Login} />
+        <Route path="/group/:id/:name" component={Chat} />
+        <Route path="/dm/:id/:name" component={Chat} />
+        <Route path="/" component={Home} exact />
+      </Switch>
     </StyledApp>
   );
 }

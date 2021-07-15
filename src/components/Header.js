@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Avatar } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -6,14 +6,18 @@ import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { useHistory } from "react-router-dom";
 import { removeUserSession } from "../Utils/Common";
+import { userContext } from "../context/userContext";
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { auth } from "../firebase";
 function Header(props) {
   let history = useHistory();
+  const setContextUser = useContext(userContext)[1];
   // const [user] = useAuthState(auth);
 
   const signOutHandleClick = () => {
     removeUserSession();
+    setContextUser(null);
+
     history.push("/login");
   };
 
@@ -47,6 +51,7 @@ const HeaderContainer = styled.div`
   background-color: #340d36;
   color: #d9d2da;
   padding: 0.5rem;
+  height: 8vh;
 `;
 const HeaderSearch = styled.div`
   display: flex;

@@ -31,7 +31,7 @@ function Login(props) {
         // console.log(response)
         // var userInfo = JSON.parse(sessionStorage.user);
         // console.log(userInfo.data.email)
-        history.push("/main");
+        history.push("/");
       })
       .catch((error) => {
         console.log(error.response.data.errors[0]);

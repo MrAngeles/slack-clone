@@ -17,6 +17,8 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { listOfAllUsers } from "./api/Api";
+import ChannelList from "./ChannelList";
+import CreateChannel from "./CreateChannel";
 
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
@@ -24,12 +26,14 @@ function Sidebar() {
   // const [channelDm, setChannelDm] = useState;
   const [user] = useAuthState(auth);
 
-  var userInfo = JSON.parse(sessionStorage.user);
-  listOfAllUsers(userInfo.headers)
-    .then((response) => response)
-    .then((result) => console.log(result.data))
-    .catch((error) => error);
-  // console.log(userInfo.headers)
+  // var userInfo = JSON.parse(sessionStorage.user);
+  // listOfAllUsers(userInfo.headers)
+  //   .then(response => response)
+  //   .then(result => console.log(result.data))
+  //   .catch(error => error);
+  // // console.log(userInfo.headers)
+
+  return <NoSibebar />;
 
   return (
     <SidebarContainer>
@@ -38,7 +42,8 @@ function Sidebar() {
           <h2>Group 2</h2>
           <h3>
             <FiberManualRecordIcon />
-            {userInfo.data.email}
+            {/* {userInfo.data.email} */}
+            hagaga
           </h3>
         </SidebarInfo>
         <CreateIcon />
@@ -54,6 +59,8 @@ function Sidebar() {
       <SidebarOption Icon={ExpandLessIcon} title="Show less" />
       <hr />
       <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
+      <CreateChannel />
+      <ChannelList />
       <hr />
       <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel" />
       {/* {channelDm?.map()} */}
@@ -67,12 +74,16 @@ function Sidebar() {
 
 export default Sidebar;
 
+function NoSibebar() {
+  return <SidebarContainer></SidebarContainer>;
+}
+
 const SidebarContainer = styled.div`
+  grid-area: 2/1/3/2;
   color: white;
   background-color: var(--slack-color);
-  flex: 0.3;
-  max-width: 304px;
-  margin-top: 38px;
+  min-width: 200px;
+  overflow-y: auto;
 
   > hr {
     margin-top: 5px;

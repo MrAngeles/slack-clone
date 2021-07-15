@@ -17,6 +17,7 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
     }
   };
 
+  //router push
   const selectChannel = () => {
     if (id) {
       dispatch();
@@ -59,8 +60,8 @@ const SidebarOptionContainer = styled.div`
     background-color: #340e36;
   }
   > .MuiSvgIcon-root {
-    font-size: 17px !important;
-    padding: 10;
+    font-size: 17px;
+    /* padding: 10; */
   }
 
   > h3 {

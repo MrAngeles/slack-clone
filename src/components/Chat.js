@@ -69,55 +69,15 @@ function Chat() {
 
   return (
     <ChatContainer>
-      {/* {roomDetails && roomMessages && ( */}
-      <>
-        <Header>
-          <HeaderLeft>
-            <h4>
-              <strong>
-                <GroupIcon />
-                {/* {roomDetails?.data().name} */}
-              </strong>
-            </h4>
-            <StarBorderOutlinedIcon />
-          </HeaderLeft>
-
-          <HeaderRight>
-            <p>
-              <InfoOutlinedIcon /> Details
-            </p>
-          </HeaderRight>
-        </Header>
-
-        <ChatMessages>
-          {/* {getMessage?.docs.map((doc) => {
-            const { message, timestamp, user, userImage } = doc.data(); */}
-
-          {/* return ( */}
-          <button onClick={retrieveMessageHandler()}></button>
-          <Message
-
-          // key={doc.id}
-          // message={message}
-          // timestamp={timestamp}
-          // user={user}
-          // userImage={userImage}
-          // onChange={handleSendMessageChange}
-          />
-
-          {/* ); */}
-          {/* })} */}
-          <ChatBottom ref={Chat} />
-        </ChatMessages>
-
-        <ChatInput
-        //Channel Name
-        // chatRef={Chat}
-        // channelName={getMessage?.data().name}
-        // channelId={Chat}
-        />
-      </>
-      {/* )} */}
+      <Header>
+        <HeaderLeft>
+          <GroupIcon />
+          <strong>Chat Name</strong>
+          <StarBorderOutlinedIcon />
+        </HeaderLeft>
+      </Header>
+      <ChatMessages />
+      <ChatInput />
     </ChatContainer>
   );
 }
@@ -130,8 +90,9 @@ const ChatBottom = styled.div`
 
 const Header = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  /* padding: 20px; */
   border-bottom: 1px solid lightgray;
 `;
 
@@ -139,6 +100,14 @@ const ChatMessages = styled.div``;
 
 const HeaderLeft = styled.div`
   display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  > strong {
+    margin-inline: 1rem;
+  }
+
+  /* display: flex;
   align-items: center;
   margin-top: -20px !important;
 
@@ -156,27 +125,13 @@ const HeaderLeft = styled.div`
     margin-bottom: -7px !important;
     margin-left: 10px;
     margin-right: 5px;
-  }
-`;
-
-const HeaderRight = styled.div`
-  > p {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin-top: -10px !important;
-  }
-
-  > p > .MuiSvgIcon-root {
-    margin-right: 5px !important;
-    font-size: 16px;
-    margin-top: 0px !important;
-  }
+  } */
 `;
 
 const ChatContainer = styled.div`
-  flex: 0.7;
-  flex-grow: 1;
-  overflow-y: scroll;
-  margin-top: 60px;
+  grid-area: 2/2/3/3;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 `;

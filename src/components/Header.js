@@ -13,8 +13,8 @@ function Header(props) {
   // const [user] = useAuthState(auth);
 
   const signOutHandleClick = () => {
-    history.push("/");
     removeUserSession();
+    history.push("/login");
   };
 
   return (

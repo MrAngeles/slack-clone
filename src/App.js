@@ -8,6 +8,7 @@ import CreateChannel from "./components/CreateChannel";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
           <Route path="/registration" component={Registration} />
           <Route path="/carl-test" component={CreateChannel} />
           <Route path="/login" component={Login} />
-          <Route path="/" component={Chat} exact />
+          <Route path="/group" component={Chat} />
+          <Route path="/dm" component={Chat} />
+          <Route path="/" component={Home} exact />
         </Switch>
       </Router>
     </StyledApp>

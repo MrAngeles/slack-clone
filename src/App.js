@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Chat from "./components/Chat";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+import CreateChannel from "./components/CreateChannel";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/registration" exact component={Registration} />
+          <Route path="/test" component={CreateChannel} />
           <Route>
             <Header path="/main" />
             <AppBody>

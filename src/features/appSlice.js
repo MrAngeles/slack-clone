@@ -1,19 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createContext } from "react";
+// import { createSlice } from "@reduxjs/toolkit";
 
-export const appSlice = createSlice({
-  name: 'app',
-  initialState: {
-    roomId: null,
+export const appSlice = createContext({
+  userDetails: [],
+  userListHeaders: {
+    "access-token": "",
+    client: "",
+    expiry: "",
+    uid: "",
   },
-  reducers: {
-    enterRoom: (state,action) => {
-      state.roomId = action.payload.roomId;
-    },
-  },
+  // initialState: {
+  //   roomId: null,
+  // },
+  // reducers: {
+  //   enterRoom: (state,action) => {
+  //     state.roomId = action.payload.roomId;
+  //   },
+  // },
 });
 
-export const { enterRoom } = appSlice.actions;
+// export const { enterRoom } = appSlice.actions;
 
-export const selectRoomId = state => state.app.roomId;
+// export const selectRoomId = state => state.app.roomId;
 
-export default appSlice.reducer;
+export default appSlice;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
@@ -21,13 +21,14 @@ import { listOfAllUsers } from "./api/Api";
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
   const [channels] = useCollection(db.collection("rooms"));
+  // const [channelDm, setChannelDm] = useState;
   const [user] = useAuthState(auth);
 
   var userInfo = JSON.parse(sessionStorage.user);
   listOfAllUsers(userInfo.headers)
-  .then(response => response)
-  .then(result => console.log(result.data))
-  .catch(error => error)
+    .then((response) => response)
+    .then((result) => console.log(result.data))
+    .catch((error) => error);
   // console.log(userInfo.headers)
 
   return (
@@ -55,6 +56,7 @@ function Sidebar() {
       <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
       <hr />
       <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel" />
+      {/* {channelDm?.map()} */}
 
       {channels?.docs.map((doc) => (
         <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />

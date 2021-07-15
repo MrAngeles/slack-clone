@@ -23,7 +23,7 @@ function ChatInput({ channelName, channelId, chatRef }) {
     method: "post",
     url,
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
       ...loggedInUser,
     },
     data: {

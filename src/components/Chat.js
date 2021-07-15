@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import { useSelector } from "react-redux";
-import { selectRoomId } from "../features/appSlice";
+// import { useSelector } from "react-redux";
+// import { selectRoomId } from "../features/appSlice";
 import ChatInput from "./ChatInput";
-import { useCollection, useDocument } from "react-firebase-hooks/firestore";
-import { db } from "../firebase";
+// import { useCollection, useDocument } from "react-firebase-hooks/firestore";
+// import { db } from "../firebase";
+// import UserContext from "../features/appSlice";
 import Message from "./Message";
 import axios from "axios";
 import GroupIcon from "@material-ui/icons/Group";
@@ -20,57 +21,51 @@ const loggedInUser = {
 };
 
 function Chat() {
-  const [sendMessage, setSendMessage] = useState("");
+  // const { userDetails, userListHeaders } = useContext(UserContext);
+  var userInfo = JSON.parse(sessionStorage.user);
+  console.log(userInfo);
 
-  const getMessage = ({
-    receiver_id,
-    receiver_class,
-    headers: { token, client, expiry, uid },
-  }) => {
-    return axios
+  // const [sendMessage, setSendMessage] = useState("");
+
+  const getMessage = () => {
+    axios
       .get("http://206.189.91.54//api/v1/messages", {
         headers: {
-          "access-token": token,
-          client: client,
-          expiry: expiry,
-          uid: uid,
-          // "access-token": "haXWCLr264GN4T2F5qSSug",
-          // client: "_690jUPp79Ik24mMmKlQJA",
-          // expiry: "1626789364",
-          // uid: "user1@example.com",
+          "Content-Type": "application/json",
+          ...loggedInUser,
         },
-
         params: {
-          receiver_id,
-          receiver_class,
+          // sender_id: userDetails[0].id || "",
+          sender_id: 1,
+          receiver_class: 1,
+          receiver_id: "user",
         },
+        // "access-token": "haXWCLr264GN4T2F5qSSug",
+        // client: "_690jUPp79Ik24mMmKlQJA",
+        // expiry: "1626789364",
+        // uid: "user1@example.com",
       })
-
       .then((response) => response)
-      .then((result) => result)
+      .then((result) => console.log(result))
       .catch((error) => error);
   };
 
-  // const chatRef = useRef(null);
-  // const roomId = useSelector(selectRoomId);
-  // const [roomDetails] = useDocument(
-  //   roomId && db.collection("rooms").doc(roomId)
-  // );
-  // const [roomMessages, loading] = useCollection(
-  //   roomId &&
-  //     db
-  //       .collection("rooms")
-  //       .doc(roomId)
-  //       .collection("messages")
-  //       .orderBy("timestamp", "asc")
-  // );
+  const retrieveMessageRequest = {
+    // "access-token": userListHeaders["access-token"],
+    // client: userListHeaders.client,
+    // expiry: userListHeaders.expiry,
+    // uid: userListHeaders.uid,
+    // sender_id: userDetails[0].id || "",
+    sender_id: 1,
+    receiver_class: 1,
+    receiver_id: "user",
+  };
 
-  // useEffect(() => {
-  //   Chat?.current?.scrollIntoView({
-  //     behavior: "smooth",
-  //   });
-  // });
-  // }, [roomId, loading]);
+  const retrieveMessageHandler = () => {
+    const data = getMessage(retrieveMessageRequest);
+    console.log(data);
+    getMessage();
+  };
 
   return (
     <ChatContainer>
@@ -99,7 +94,9 @@ function Chat() {
             const { message, timestamp, user, userImage } = doc.data(); */}
 
           {/* return ( */}
+          <button onClick={retrieveMessageHandler()}></button>
           <Message
+
           // key={doc.id}
           // message={message}
           // timestamp={timestamp}
@@ -107,6 +104,7 @@ function Chat() {
           // userImage={userImage}
           // onChange={handleSendMessageChange}
           />
+
           {/* ); */}
           {/* })} */}
           <ChatBottom ref={Chat} />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ChannelList from "./ChannelList";
 
 const loggedInUser = {
   "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
@@ -41,17 +42,20 @@ function CreateChannel() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        text="text"
-        onChange={handleNameChange}
-        value={name}
-        placeholder="Enter Channel"
-        id="channel"
-        autoComplete="off"
-      />
-      <button type="submit">submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          text="text"
+          onChange={handleNameChange}
+          value={name}
+          placeholder="Enter Channel"
+          id="channel"
+          autoComplete="off"
+        />
+        <button type="submit">submit</button>
+      </form>
+      <ChannelList />
+    </>
   );
 }
 

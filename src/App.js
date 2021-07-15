@@ -4,11 +4,15 @@ import styled from "styled-components";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
 import CreateChannel from "./components/CreateChannel";
+<<<<<<< HEAD
 // import Main from "./components/Main";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
+=======
+import ChannelDetails from "./components/ChannelDetails";
+>>>>>>> f8b150abebd81140fea86ca1d35098c01f32df41
 
 function App() {
   return (

@@ -9,7 +9,7 @@ function Registration(props) {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    password_confirmation: "",
+    password_confirmation: ""
   });
 
   const [error, setError] = useState(null);
@@ -21,28 +21,28 @@ function Registration(props) {
     history.push("/");
   };
 
-  const submit = (e) => {
+  const submit = e => {
     e.preventDefault();
 
     var data = {
       email: user.email,
       password: user.password,
-      password_confirmation: user.password_confirmation,
+      password_confirmation: user.password_confirmation
     };
 
     registrationUser(data)
       .then(response => {
         history.push("/");
-        return response
+        return response;
       })
-      .then((result) => console.log(result))
-      .catch((response) => {
-        setError(response.response.data.errors.full_messages[0])
-        return response
+      .then(result => console.log(result))
+      .catch(response => {
+        setError(response.response.data.errors.full_messages[0]);
+        return response;
       });
   };
 
-  const inputChangeHandler = (e) => {
+  const inputChangeHandler = e => {
     const newUser = { ...user };
     newUser[e.target.id] = e.target.value;
     setUser(newUser);
@@ -50,54 +50,50 @@ function Registration(props) {
 
   const errorStyle = {
     color: "red",
-    marginBottom: "20px",
+    marginBottom: "20px"
   };
-
 
   return (
     <div>
-      
-        <RegistrationContainer>
-          <RegistrationInnerContainer>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-              alt=""
-            />
-            <h1>Sign up to slack</h1>
-            <p>Join slack now!</p>
-            <form onSubmit={submit}>
-              <RegistrationInputContainer>
-                <input
-                  onChange={(e) => inputChangeHandler(e)}
-                  type="email"
-                  placeholder="Email"
-                  id="email"
-                />
-                <input
-                  onChange={(e) => inputChangeHandler(e)}
-                  type="password"
-                  placeholder="Password"
-                  id="password"
-                />
-                <input
-                  onChange={(e) => inputChangeHandler(e)}
-                  type="password"
-                  placeholder="Confirm Password"
-                  id="password_confirmation"
-                />
-              </RegistrationInputContainer>
-              {error && <div style={errorStyle}>{error}</div>}
-              <RegistrationButtonContainer>
-                <Button type="submit">Register</Button>
-                <Button onClick={signInHandleClick}>
-                  Already have an account
-                </Button>
-              </RegistrationButtonContainer>
-
-            </form>
-          </RegistrationInnerContainer>
-        </RegistrationContainer>
-      
+      <RegistrationContainer>
+        <RegistrationInnerContainer>
+          <img
+            src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
+            alt=""
+          />
+          <h1>Sign up to slack</h1>
+          <p>Join slack now!</p>
+          <form onSubmit={submit}>
+            <RegistrationInputContainer>
+              <input
+                onChange={e => inputChangeHandler(e)}
+                type="email"
+                placeholder="Email"
+                id="email"
+              />
+              <input
+                onChange={e => inputChangeHandler(e)}
+                type="password"
+                placeholder="Password"
+                id="password"
+              />
+              <input
+                onChange={e => inputChangeHandler(e)}
+                type="password"
+                placeholder="Confirm Password"
+                id="password_confirmation"
+              />
+            </RegistrationInputContainer>
+            {error && <div style={errorStyle}>{error}</div>}
+            <RegistrationButtonContainer>
+              <Button type="submit">Register</Button>
+              <Button onClick={signInHandleClick}>
+                Already have an account
+              </Button>
+            </RegistrationButtonContainer>
+          </form>
+        </RegistrationInnerContainer>
+      </RegistrationContainer>
     </div>
   );
 }
@@ -132,7 +128,7 @@ const RegistrationInputContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  
+
   > input {
     font-size: 18px;
     padding: 10px 10px 10px 5px;

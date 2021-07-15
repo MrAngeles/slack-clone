@@ -23,12 +23,14 @@ function Sidebar() {
   const [channels] = useCollection(db.collection("rooms"));
   const [user] = useAuthState(auth);
 
-  var userInfo = JSON.parse(sessionStorage.user);
-  listOfAllUsers(userInfo.headers)
-    .then(response => response)
-    .then(result => console.log(result.data))
-    .catch(error => error);
-  // console.log(userInfo.headers)
+  // var userInfo = JSON.parse(sessionStorage.user);
+  // listOfAllUsers(userInfo.headers)
+  //   .then(response => response)
+  //   .then(result => console.log(result.data))
+  //   .catch(error => error);
+  // // console.log(userInfo.headers)
+
+  return <NoSibebar />;
 
   return (
     <SidebarContainer>
@@ -37,7 +39,8 @@ function Sidebar() {
           <h2>Group 2</h2>
           <h3>
             <FiberManualRecordIcon />
-            {userInfo.data.email}
+            {/* {userInfo.data.email} */}
+            hagaga
           </h3>
         </SidebarInfo>
         <CreateIcon />
@@ -64,6 +67,10 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+function NoSibebar() {
+  return <SidebarContainer></SidebarContainer>;
+}
 
 const SidebarContainer = styled.div`
   grid-area: 2/1/3/2;

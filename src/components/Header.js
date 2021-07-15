@@ -20,11 +20,7 @@ function Header(props) {
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderAvatar
-          onClick={signOutHandleClick}
-          // alt={user?.displayName}
-          // src={user?.photoURL}
-        />
+        <HeaderAvatar onClick={signOutHandleClick} />
         <AccessTimeIcon />
       </HeaderLeft>
 
@@ -41,62 +37,49 @@ function Header(props) {
 }
 
 export default Header;
-const HeaderSearch = styled.div`
-  flex: 0.4;
-  opacity: 1;
-  border-radius: 6px;
-  background-color: #421f44;
-  text-align: center;
+const HeaderContainer = styled.div`
+  box-sizing: border-box;
+  grid-area: 1/1/2/3;
   display: flex;
-  padding: 0 82px;
-  margin-right: 79px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #340d36;
   color: #d9d2da;
+  padding: 0.5rem;
+`;
+const HeaderSearch = styled.div`
+  display: flex;
+  align-items: center;
   border: 1px #674a68 solid;
+  padding: 5px;
+  width: 100%;
+  max-width: 30rem;
+  border-radius: 6px;
+
   > input {
     background-color: transparent;
     border: none;
     text-align: center;
-    min-width: 30vw;
     outline: 0;
     color: white;
     font-size: 13px;
-    margin-left: -200px;
   }
-  > ::placeholder {
-    color: #d9d2da;
-  }
-  > .MuiSvgIcon-root {
-    display: flex;
-    margin: 2px 0px 2px 208px;
-    font-size: 18px;
-  }
-`;
-
-const HeaderContainer = styled.div`
-  display: flex;
-  position: fixed;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0;
-  background-color: #340d36;
-  color: #d9d2da;
 `;
 
 const HeaderLeft = styled.div`
-  flex: 0.3;
   display: flex;
   align-items: center;
-  margin-left: 20px;
 
+  > .MuiAvatar-root {
+    font-size: 22px;
+  }
   > .MuiSvgIcon-root {
-    margin-left: auto;
-    margin-right: 22px;
-    font-size: 22px !important;
+    font-size: 22px;
   }
 `;
 const HeaderRight = styled.div`
-  flex: 0.3;
+  /* flex: 0.3;
   display: flex;
   align-items: flex-end;
 
@@ -104,19 +87,19 @@ const HeaderRight = styled.div`
     margin-left: -57px;
     margin-right: 420px;
     font-size: 22px !important;
-  }
+  } */
 `;
 
 const HeaderAvatar = styled(Avatar)`
-  position: absolute;
+  /* position: absolute;
   left: 1612px;
   width: 28px !important;
   height: 28px !important;
   cursor: pointer;
   margin: 5px;
-  border-radius: 5px !important;
+  border-radius: 5px !important; */
 
-  :hover {
+  /* :hover {
     opacity: 0.8;
-  }
+  } */
 `;

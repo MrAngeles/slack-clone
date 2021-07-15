@@ -25,9 +25,9 @@ function Sidebar() {
 
   var userInfo = JSON.parse(sessionStorage.user);
   listOfAllUsers(userInfo.headers)
-  .then(response => response)
-  .then(result => console.log(result.data))
-  .catch(error => error)
+    .then(response => response)
+    .then(result => console.log(result.data))
+    .catch(error => error);
   // console.log(userInfo.headers)
 
   return (
@@ -56,7 +56,7 @@ function Sidebar() {
       <hr />
       <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel" />
 
-      {channels?.docs.map((doc) => (
+      {channels?.docs.map(doc => (
         <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
       ))}
     </SidebarContainer>
@@ -66,11 +66,11 @@ function Sidebar() {
 export default Sidebar;
 
 const SidebarContainer = styled.div`
+  grid-area: 2/1/3/2;
   color: white;
   background-color: var(--slack-color);
-  flex: 0.3;
-  max-width: 304px;
-  margin-top: 38px;
+  min-width: 200px;
+  overflow-y: auto;
 
   > hr {
     margin-top: 5px;

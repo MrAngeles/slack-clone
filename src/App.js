@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -7,32 +6,34 @@ import styled from "styled-components";
 import Chat from "./components/Chat";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+import CreateChannel from "./components/CreateChannel";
 
 function App() {
   return (
-    <div className="app">
+    <StyledApp>
       <Router>
         <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/registration" exact component={Registration} />
-          <Route>
-            <Header path="/main" />
-            <AppBody>
-              <Sidebar />
-              <Route>
-                <Chat path="/chat" exact />
-              </Route>
-            </AppBody>
+          <Route path="/registration" component={Registration} />
+          <Route path="/carl-test" component={CreateChannel} />
+          <Route path="/main">
+            <Header />
+            {/* <AppBody> */}
+            <Sidebar />
+            <Chat />
+            {/* </AppBody> */}
           </Route>
+          <Route path="/" exact component={Login} />
         </Switch>
       </Router>
-    </div>
+    </StyledApp>
   );
 }
 
 export default App;
 
-const AppBody = styled.div`
-  display: flex;
+const StyledApp = styled.div`
   height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template: auto 1fr / auto 1fr;
 `;

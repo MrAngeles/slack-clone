@@ -12,16 +12,17 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
 
     if (channelName) {
       db.collection("rooms").add({
-        name: channelName,
+        name: channelName
       });
     }
   };
 
+  //router push
   const selectChannel = () => {
     if (id) {
       dispatch(
         enterRoom({
-          roomId: id,
+          roomId: id
         })
       );
     }
@@ -60,8 +61,8 @@ const SidebarOptionContainer = styled.div`
     background-color: #340e36;
   }
   > .MuiSvgIcon-root {
-    font-size: 17px !important;
-    padding: 10;
+    font-size: 17px;
+    /* padding: 10; */
   }
 
   > h3 {

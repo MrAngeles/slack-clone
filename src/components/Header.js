@@ -51,10 +51,7 @@ const HeaderContainer = styled.div`
   background-color: #340d36;
   color: #d9d2da;
   padding: 0.5rem;
-<<<<<<< HEAD
-=======
   height: 8vh;
->>>>>>> 29b4e497c91c8ea89c01ba5ca3538f1bc8f755a6
 `;
 const HeaderSearch = styled.div`
   display: flex;
@@ -81,6 +78,9 @@ const HeaderLeft = styled.div`
 
   > .MuiAvatar-root {
     font-size: 22px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
   }
   > .MuiSvgIcon-root {
     font-size: 22px;
@@ -107,7 +107,7 @@ const HeaderAvatar = styled(Avatar)`
   margin: 5px;
   border-radius: 5px !important; */
 
-  /* :hover {
+  :hover {
     opacity: 0.8;
-  } */
+  }
 `;

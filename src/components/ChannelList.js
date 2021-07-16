@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const ChannelList = () => {
   const loggedInUser = {
@@ -46,10 +47,12 @@ const ChannelList = () => {
         channels.data.map((channel, index) => (
           <div className="channels-preview" key={index}>
             <div className="mychannels">
-              <Link to={`/group/${channel.id}/${channel.name}`}>
-                {" "}
-                {channel.name}{" "}
-              </Link>
+              <ChannelListName>
+                <Link to={`/group/${channel.id}/${channel.name}`}>
+                  {" "}
+                  {channel.name}{" "}
+                </Link>
+              </ChannelListName>
             </div>
           </div>
         ))}
@@ -58,3 +61,12 @@ const ChannelList = () => {
 };
 
 export default ChannelList;
+
+const ChannelListName = styled.div`
+  margin-bottom: 10px;
+  > a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+  }
+`;

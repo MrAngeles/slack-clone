@@ -1,21 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import GroupIcon from "@material-ui/icons/Group";
-// import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonIcon from "@material-ui/icons/Person";
-import { useHistory, Link } from "react-router-dom";
 
-function SidebarLink({ title, id }) {
+function SidebarAction({ icon: Icon, name, action }) {
   return (
-    <SidebarOptionContainer>
-      <PersonIcon />
-
-      <Link to={`/dm/${id}/${title}`}>{title}</Link>
+    <SidebarOptionContainer onClick={action}>
+      <Icon />
+      <button>{name}</button>
     </SidebarOptionContainer>
   );
 }
 
-export default SidebarLink;
+export default SidebarAction;
 
 const SidebarOptionContainer = styled.div`
   display: flex;
@@ -26,15 +22,20 @@ const SidebarOptionContainer = styled.div`
   cursor: pointer;
   max-width: 12rem;
 
-  > a {
+  > button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    appearance: none;
+    background: none;
+    outline: none;
     color: white;
-    text-decoration: none;
-    display: block;
-    padding: 0.1rem;
+    display: inline-block;
+    /* padding: 0.1rem; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 300;
     /* font-size: 20px; */
   }

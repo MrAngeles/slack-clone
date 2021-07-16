@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { enterRoom } from "../features/appSlice";
-import { db } from "../firebase";
 import PersonIcon from "@material-ui/icons/Person";
 import { useHistory } from "react-router-dom";
 function SidebarOption({ Icon, title, to }) {
@@ -28,7 +26,7 @@ export default SidebarOption;
 
 const SidebarOptionContainer = styled.div`
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   align-items: center;
   padding-left: 4px;
   cursor: pointer;

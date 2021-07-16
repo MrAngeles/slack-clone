@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const AllDms = () => {
+const UserChannel = () => {
   const loggedInUser = {
     "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
     client: "tdluJrvdfrqEmGV_nCLpvQ",
@@ -11,7 +11,7 @@ const AllDms = () => {
     id: 31
   };
 
-  const [dms, setDms] = useState([]);
+  const [channels, setChannels] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,7 +23,7 @@ const AllDms = () => {
       headers: loggedInUser
     };
 
-    fetch(`http://206.189.91.54//api/v1/users/recent`, requestOptions)
+    fetch(`http://206.189.91.54//api/v1/channel/owned`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw Error("could not fetch the data for that resource");
@@ -31,10 +31,10 @@ const AllDms = () => {
         return response.json();
       })
       .then(data => {
-          const dms = data.data
-          setDms(dms);
+          const channels = data.data
+          setChannels(channels);
           setIsPending(false);
-          console.log(dms);
+          console.log(data);
       })
       .catch(error => {
         // setIsPending(false);
@@ -59,7 +59,7 @@ const AllDms = () => {
   );
 };
 
-export default AllDms
+export default UserChannel
 
 const StyledDMsContainer= styled.div `
     display: flex;

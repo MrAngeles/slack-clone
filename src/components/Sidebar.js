@@ -45,7 +45,7 @@ function Sidebar() {
 
         <SidebarOption Icon={InsertCommentIcon} title="All Dms" to="/all-dms" />
         <SidebarOption Icon={InsertCommentIcon} title="Thread" />
-        <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
+        <SidebarOption Icon={InboxIcon} title="My Channels" to="/owned-channels" />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
         <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/all-users" />
         <SidebarOption Icon={ExpandLessIcon} title="Show less" />

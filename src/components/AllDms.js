@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { userContext } from "../context/userContext";
 
 const AllDms = () => {
-  const loggedInUser = {
-    "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
-    client: "tdluJrvdfrqEmGV_nCLpvQ",
-    expiry: 1626966033,
-    uid: "m1@m.com",
-    id: 31
-  };
+  const loggedInUser = useContext(userContext)[0];
 
   const [dms, setDms] = useState([]);
   const [isPending, setIsPending] = useState(true);
@@ -42,17 +38,31 @@ const AllDms = () => {
   }, []);
 
   return (
-    <div>
+    <StyledDMsContainer>
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {!isPending &&
         dms.map(dm => (
-          <div key={dm.id}>
+          <StyledDMs key={dm.id}>
             <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}</Link>
-          </div>
+          </StyledDMs>
         ))}
-    </div>
+    </StyledDMsContainer>
   );
 };
 
 export default AllDms;
+
+const StyledDMsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-decoration: "none";
+`;
+
+const StyledDMs = styled.div`
+  display: flex;
+  padding-bottom: 1em;
+  & div {
+    text-decoration: "none";
+  }
+`;

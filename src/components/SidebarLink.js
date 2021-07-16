@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import GroupIcon from "@material-ui/icons/Group";
-// import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonIcon from "@material-ui/icons/Person";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SidebarLink({ title, id }) {
+  const styleLink = {
+    textDecoration: "none"
+  };
+
   return (
     <SidebarOptionContainer>
       <PersonIcon />

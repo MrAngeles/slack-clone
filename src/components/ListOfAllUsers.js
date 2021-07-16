@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { listOfAllUsers } from "./api/Api";
-import { Link } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 
 function ListAllUsers() {
@@ -34,10 +32,13 @@ function ListAllUsers() {
       });
   }, [allUsers]);
 
+<<<<<<< HEAD
   const linkStyle = {
     textDecoration: "none",
     margin: 30
   };
+=======
+>>>>>>> 2a15f7b6944b382a8108acab5ccd3c4450d76414
 
   return (
     <div>
@@ -50,7 +51,6 @@ function ListAllUsers() {
               title={user.email}
               id={user.id}
               to={`/all-users/${user.id}/${user.email}`}
-              style={linkStyle}
             />
           </div>
         ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 // import { auth, provider } from '../firebase';
@@ -6,16 +6,16 @@ import { useHistory } from "react-router-dom";
 // import axios from "axios";
 import { setUserSession } from "../Utils/Common";
 import { loginUser } from "./api/Api";
+import { userContext } from "../context/userContext";
 
 function Login(props) {
   let history = useHistory();
-
+  const setContextUser = useContext(userContext)[1];
+  const [error, setError] = useState(null);
   const [user, setUser] = useState({
     email: "",
     password: ""
   });
-
-  const [error, setError] = useState(null);
 
   const submit = e => {
     e.preventDefault();
@@ -27,7 +27,18 @@ function Login(props) {
 
     loginUser(data)
       .then(response => {
-        setUserSession(response);
+        const { headers, data } = response;
+        const userData = {
+          "access-token": headers["access-token"],
+          client: headers.client,
+          expiry: headers.expiry,
+          uid: headers.uid,
+          id: data.data.id
+        };
+        console.log(response);
+        setUserSession(userData);
+        setContextUser(userData);
+
         // console.log(response)
         // var userInfo = JSON.parse(sessionStorage.user);
         // console.log(userInfo.data.email)
@@ -44,7 +55,7 @@ function Login(props) {
     const loginUser = { ...user };
     loginUser[e.target.id] = e.target.value;
     setUser(loginUser);
-    console.log(loginUser);
+    // console.log(loginUser);
   };
 
   const signUpHandleClick = () => {

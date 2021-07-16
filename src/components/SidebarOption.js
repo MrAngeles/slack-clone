@@ -4,28 +4,19 @@ import styled from "styled-components";
 import { enterRoom } from "../features/appSlice";
 import { db } from "../firebase";
 import GroupIcon from "@material-ui/icons/Group";
-function SidebarOption({ Icon, title, addChannelOption, id }) {
+import { useHistory } from "react-router-dom";
+function SidebarOption({ Icon, title, addChannelOption, id, to }) {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const addChannel = () => {
-    const channelName = prompt("Please enter channel name");
-
-    if (channelName) {
-      db.collection("rooms").add({
-        name: channelName
-      });
-    }
+    history.push(to);
   };
 
   //router push
   const selectChannel = () => {
-    if (id) {
-      dispatch(
-        enterRoom({
-          roomId: id
-        })
-      );
-    }
+    console.log(id);
+    history.push("/dm");
   };
 
   return (

@@ -54,24 +54,3 @@ export const retrieveMessage = (data, receiver) => {
   .catch(error => error)
   
 }
-
-export const  listOfAllUsers = (headers) => {
-  // console.log(headers)
-  let config = {
-    method: 'get',
-    url: 'http://206.189.91.54//api/v1/users',
-    headers: { 
-      'access-token': headers['access-token'], 
-      'client': headers['client'], 
-      'expiry': headers['expiry'], 
-      'uid': headers['uid'],
-      "Content-Type": "application/json",
-      crossDomain: true,
-      Accept: "application/json",
-    },
-    // data : data
-  };
-
-  return axios(config)
-
-} 

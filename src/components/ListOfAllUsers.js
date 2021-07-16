@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { listOfAllUsers } from "./api/Api";
 import { Link } from "react-router-dom";
+import SidebarLink from "./SidebarLink";
 
 function ListAllUsers() {
 
@@ -11,27 +12,6 @@ function ListAllUsers() {
     const [allUsers, setAllUsers] = useState(null) 
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
-
-    // console.log(userInfo)
-
-    // useEffect(() => {
-    //     listOfAllUsers(userInfo)
-    //     .then(response => {
-    //         if (!response.ok) {
-    //         throw Error("could not fetch the data for that resource");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(result => {
-    //         console.log(result)
-    //         setAllUsers(result)
-    //         setIsPending(false);
-    //     })
-    //     .catch(error => {
-    //         setIsPending(false);
-    //         setError(error)
-    //     });
-    // }, [allUsers])
 
     useEffect(() => {
         const requestOptions = {
@@ -59,7 +39,7 @@ function ListAllUsers() {
 
       const linkStyle = {
           textDecoration: "none",
-          margin: 20,
+          margin: 30
       }
 
     return (
@@ -69,11 +49,8 @@ function ListAllUsers() {
                 {!isPending &&
                 allUsers.data.map((user, index) => (
                     <div key={index}>
-                        <Link to={`/all-users/${user.id}/${user.email}`} style={linkStyle}>
-                        {" "}
-                        {user.email}
-                        {" "}
-                        </Link>
+                        
+                        <SidebarLink title={user.email} id={user.id} to={`/all-users/${user.id}/${user.email}`} style={linkStyle} />
                     </div>
                 ))}
             </div>

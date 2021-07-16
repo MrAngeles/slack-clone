@@ -13,8 +13,8 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarOption from "./SidebarOption";
-import { listOfAllUsers } from "./api/Api";
 import ChannelList from "./ChannelList";
+import ListAllUsers from "./ListOfAllUsers";
 import CreateChannel from "./CreateChannel";
 import { userContext } from "../context/userContext";
 import SidebarLink from "./SidebarLink";
@@ -53,7 +53,7 @@ function Sidebar() {
         <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
         <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
-        <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
+        <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/all-users"/>
         <SidebarOption Icon={AppsIcon} title="Apps" />
         <SidebarOption Icon={FileCopyIcon} title="File browser" />
         <SidebarOption Icon={ExpandLessIcon} title="Show less" />
@@ -67,9 +67,11 @@ function Sidebar() {
           title="Add Channel"
         />
         <ChannelList />
+       
         <SidebarLink id={31} title="Dog" />
         <SidebarLink id={33} title="Cat" />
         <SidebarLink id={34} title="Mouse" />
+        <ListAllUsers/> 
 
         {/* {channels?.docs.map(doc => (
         <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />

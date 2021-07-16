@@ -48,7 +48,7 @@ function Sidebar() {
           <CreateIcon />
         </SidebarHeader>
 
-        <SidebarOption Icon={InsertCommentIcon} title="Thread" />
+        <SidebarOption Icon={InsertCommentIcon} title="All Dms" to="/all-dms" />
         <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
         <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />

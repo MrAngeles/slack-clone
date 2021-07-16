@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { userContext } from "../context/userContext";
 
 const UserChannel = () => {
+
+//   const loggedInUser = useContext(userContext)[0];
   const loggedInUser = {
     "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
     client: "tdluJrvdfrqEmGV_nCLpvQ",
@@ -15,7 +18,7 @@ const UserChannel = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(dms);
+ 
 
   useEffect(() => {
     const requestOptions = {
@@ -37,8 +40,8 @@ const UserChannel = () => {
           console.log(data);
       })
       .catch(error => {
-        // setIsPending(false);
-        // setError(error);
+        setIsPending(false);
+        setError(error);
       });
   }, []);
 
@@ -48,9 +51,9 @@ const UserChannel = () => {
                 {error && <div>{error}</div>}
                 {isPending && <div>Loading...</div>}
                 {!isPending &&
-                    dms.map((dm) => (
-                        <StyledDMs key={dm.id}>
-                            <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}
+                    channels.map((channel) => (
+                        <StyledDMs key={channel.id}>
+                            <Link to={`/group/${channel.id}/${channel.name}`}>{channel.name}
                             </Link>
                         </StyledDMs>
                     ))}

@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { userContext } from "../context/userContext";
 
 const AllDms = () => {
-  const loggedInUser = {
-    "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
-    client: "tdluJrvdfrqEmGV_nCLpvQ",
-    expiry: 1626966033,
-    uid: "m1@m.com",
-    id: 31
-  };
-
+    const loggedInUser = useContext(userContext)[0];
+  
   const [dms, setDms] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);

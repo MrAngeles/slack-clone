@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
@@ -12,18 +12,21 @@ import AddIcon from "@material-ui/icons/Add";
 import SidebarOption from "./SidebarOption";
 import ChannelList from "./ChannelList";
 import ListAllUsers from "./ListOfAllUsers";
+import SidebarAction from "./SidebarAction";
 import { userContext } from "../context/userContext";
 
 function Sidebar() {
-  //would typically use usestate but now we will use firebase hooks
   const contextUser = useContext(userContext)[0];
+  const [userShown, showUsers] = useState(false);
+  const [channelsShown, showChannels] = useState(false);
 
-  // var userInfo = JSON.parse(sessionStorage.user);
-  // listOfAllUsers(userInfo.headers)
-  //   .then(response => response)
-  //   .then(result => console.log(result.data))
-  //   .catch(error => error);
-  // // console.log(userInfo.headers)
+  function toggleUsers() {
+    showUsers(s => !s);
+  }
+
+  function toggleChannels() {
+    showChannels(s => !s);
+  }
 
   if (!contextUser) {
     return <NoSibebar />;
@@ -45,17 +48,35 @@ function Sidebar() {
 
         <SidebarOption Icon={InsertCommentIcon} title="All Dms" to="/all-dms" />
         <SidebarOption Icon={InsertCommentIcon} title="Thread" />
-        <SidebarOption Icon={InboxIcon} title="My Channels" to="/owned-channels" />
+        <SidebarOption
+          Icon={InboxIcon}
+          title="My Channels"
+          to="/owned-channels"
+        />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
         <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/all-users" />
-        <SidebarOption Icon={ExpandLessIcon} title="Show less" />
+
+        <SidebarOption Icon={AddIcon} to="/add-channel" title="Add Channel" />
         <hr />
-        <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
+        <SidebarAction
+          name="Channels"
+          icon={ExpandMoreIcon}
+          action={toggleChannels}
+        />
+        {/* <SidebarOption Icon={ExpandMoreIcon} title="Channels" /> */}
         {/* <CreateChannel /> */}
         <hr />
-        <SidebarOption Icon={AddIcon} to="/add-channel" title="Add Channel" />
-        <ChannelList />
-        <ListAllUsers />
+        {channelsShown && <ChannelList />}
+        <hr />
+        <SidebarAction
+          name="Users"
+          icon={ExpandMoreIcon}
+          action={toggleUsers}
+        />
+        {/* <SidebarOption Icon={ExpandMoreIcon} title="Users" /> */}
+        {/* <CreateChannel /> */}
+        <hr />
+        {userShown && <ListAllUsers />}
       </SidebarContainer>
     </StyledDiv>
   );
@@ -72,6 +93,7 @@ const StyledDiv = styled.div`
   overflow-y: auto;
   min-width: 200px;
   height: 92vh;
+  background-color: var(--slack-color);
 `;
 
 const StyledNoSideBar = styled(StyledDiv)`

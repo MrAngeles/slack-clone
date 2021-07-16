@@ -11,27 +11,26 @@ function ListAllUsers() {
   useEffect(() => {
     const requestOptions = {
       method: "GET",
-      headers: userInfo,
+      headers: userInfo
     };
 
     fetch(`http://206.189.91.54//api/v1/users`, requestOptions)
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
           throw Error("could not fetch the data for that resource");
         }
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         setAllUsers(data);
         setIsPending(false);
         setError(null);
       })
-      .catch((error) => {
+      .catch(error => {
         setIsPending(false);
         setError(error);
       });
   }, [allUsers]);
-
 
   return (
     <div>

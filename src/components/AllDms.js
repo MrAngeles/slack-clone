@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { userContext } from "../context/userContext";
 
 const AllDms = () => {
-    const loggedInUser = useContext(userContext)[0];
-  
+  const loggedInUser = useContext(userContext)[0];
+
   const [dms, setDms] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
@@ -26,10 +26,10 @@ const AllDms = () => {
         return response.json();
       })
       .then(data => {
-          const dms = data.data
-          setDms(dms);
-          setIsPending(false);
-          console.log(dms);
+        const dms = data.data;
+        setDms(dms);
+        setIsPending(false);
+        console.log(dms);
       })
       .catch(error => {
         // setIsPending(false);
@@ -38,35 +38,31 @@ const AllDms = () => {
   }, []);
 
   return (
-     
-            <StyledDMsContainer>
-                {error && <div>{error}</div>}
-                {isPending && <div>Loading...</div>}
-                {!isPending &&
-                    dms.map((dm) => (
-                        <StyledDMs key={dm.id}>
-                            <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}
-                            </Link>
-                        </StyledDMs>
-                    ))}
-            </StyledDMsContainer>
-              
+    <StyledDMsContainer>
+      {error && <div>{error}</div>}
+      {isPending && <div>Loading...</div>}
+      {!isPending &&
+        dms.map(dm => (
+          <StyledDMs key={dm.id}>
+            <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}</Link>
+          </StyledDMs>
+        ))}
+    </StyledDMsContainer>
   );
 };
 
-export default AllDms
+export default AllDms;
 
-const StyledDMsContainer= styled.div `
-    display: flex;
-    flex-direction: column;
-    text-decoration: 'none';
-    
+const StyledDMsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-decoration: "none";
 `;
 
-const StyledDMs = styled.div `
-    display: flex;
-    padding-bottom: 1em;
-    & div{
-      text-decoration: 'none';
-    }
+const StyledDMs = styled.div`
+  display: flex;
+  padding-bottom: 1em;
+  & div {
+    text-decoration: "none";
+  }
 `;

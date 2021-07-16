@@ -22,15 +22,15 @@ import UserChannel from "./components/UserChannel";
 
 //first render
 function App() {
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true); //initial
   const [contextUser, setContextUser] = useContext(userContext);
   const history = useHistory();
 
   useEffect(() => {
-    const sessionUser = getUser();
+    const sessionUser = getUser(); //get user sa storage
     if (sessionUser) {
-      setContextUser(sessionUser);
-      setLoading(false);
+      setContextUser(sessionUser); //user sa storage --> set to global state
+      setLoading(false); //change state
     } else {
       setLoading(false);
       history.push("/login");

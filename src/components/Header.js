@@ -7,8 +7,7 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { useHistory } from "react-router-dom";
 import { removeUserSession } from "../Utils/Common";
 import { userContext } from "../context/userContext";
-// import { useAuthState } from "react-firebase-hooks/auth";
-// import { auth } from "../firebase";
+
 function Header(props) {
   let history = useHistory();
   const setContextUser = useContext(userContext)[1];

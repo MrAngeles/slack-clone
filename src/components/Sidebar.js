@@ -82,7 +82,7 @@ function Sidebar() {
 export default Sidebar;
 
 function NoSibebar() {
-  return <SidebarContainer></SidebarContainer>;
+  return <StyledNoSideBar></StyledNoSideBar>;
 }
 
 const StyledDiv = styled.div`
@@ -90,6 +90,10 @@ const StyledDiv = styled.div`
   overflow-y: auto;
   min-width: 200px;
   height: 92vh;
+`;
+
+const StyledNoSideBar = styled(StyledDiv)`
+  background-color: var(--slack-color);
 `;
 
 const SidebarContainer = styled.div`

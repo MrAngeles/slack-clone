@@ -14,26 +14,26 @@ function Login(props) {
   const [error, setError] = useState(null);
   const [user, setUser] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
 
     var data = {
       email: user.email,
-      password: user.password
+      password: user.password,
     };
 
     loginUser(data)
-      .then(response => {
+      .then((response) => {
         const { headers, data } = response;
         const userData = {
           "access-token": headers["access-token"],
           client: headers.client,
           expiry: headers.expiry,
           uid: headers.uid,
-          id: data.data.id
+          id: data.data.id,
         };
         console.log(response);
         setUserSession(userData);
@@ -44,14 +44,14 @@ function Login(props) {
         // console.log(userInfo.data.email)
         history.push("/");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.response.data.errors[0]);
         setError(error.response.data.errors[0]);
         return error;
       });
   };
 
-  const inputChangeHandler = e => {
+  const inputChangeHandler = (e) => {
     const loginUser = { ...user };
     loginUser[e.target.id] = e.target.value;
     setUser(loginUser);
@@ -64,7 +64,7 @@ function Login(props) {
 
   const errorStyle = {
     color: "red",
-    marginBottom: "20px"
+    marginBottom: "20px",
   };
 
   return (
@@ -79,14 +79,14 @@ function Login(props) {
         <form onSubmit={submit} autoComplete="new-password">
           <LoginInputContainer>
             <input
-              onChange={e => inputChangeHandler(e)}
+              onChange={(e) => inputChangeHandler(e)}
               type="email"
               placeholder="Email"
               id="email"
               autoComplete="off"
             />
             <input
-              onChange={e => inputChangeHandler(e)}
+              onChange={(e) => inputChangeHandler(e)}
               type="password"
               placeholder="Password"
               id="password"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const ChannelList = () => {
   const loggedInUser = {
@@ -7,7 +8,7 @@ const ChannelList = () => {
     client: "tdluJrvdfrqEmGV_nCLpvQ",
     expiry: 1626966033,
     uid: "m1@m.com",
-    id: 31
+    id: 31,
   };
 
   const [channels, setChannels] = useState(null);
@@ -17,22 +18,22 @@ const ChannelList = () => {
   useEffect(() => {
     const requestOptions = {
       method: "GET",
-      headers: loggedInUser
+      headers: loggedInUser,
     };
 
     fetch(`http://206.189.91.54//api/v1/channels`, requestOptions)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           throw Error("could not fetch the data for that resource");
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         setChannels(data);
         setIsPending(false);
         setError(null);
       })
-      .catch(error => {
+      .catch((error) => {
         setIsPending(false);
         setError(error);
       });
@@ -46,10 +47,12 @@ const ChannelList = () => {
         channels.data.map((channel, index) => (
           <div className="channels-preview" key={index}>
             <div className="mychannels">
-              <Link to={`/group/${channel.id}/${channel.name}`}>
-                {" "}
-                {channel.name}{" "}
-              </Link>
+              <ChannelListName>
+                <Link to={`/group/${channel.id}/${channel.name}`}>
+                  {" "}
+                  {channel.name}{" "}
+                </Link>
+              </ChannelListName>
             </div>
           </div>
         ))}
@@ -58,3 +61,12 @@ const ChannelList = () => {
 };
 
 export default ChannelList;
+
+const ChannelListName = styled.div`
+  margin-bottom: 10px;
+  > a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+  }
+`;

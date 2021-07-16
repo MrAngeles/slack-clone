@@ -78,6 +78,9 @@ const HeaderLeft = styled.div`
 
   > .MuiAvatar-root {
     font-size: 22px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
   }
   > .MuiSvgIcon-root {
     font-size: 22px;
@@ -104,7 +107,7 @@ const HeaderAvatar = styled(Avatar)`
   margin: 5px;
   border-radius: 5px !important; */
 
-  /* :hover {
+  :hover {
     opacity: 0.8;
-  } */
+  }
 `;

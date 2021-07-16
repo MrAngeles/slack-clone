@@ -46,7 +46,10 @@ const ChannelList = () => {
         channels.data.map((channel, index) => (
           <div className="channels-preview" key={index}>
             <div className="mychannels">
-              <Link to={`/main/channel/${channel.id}`}> {channel.name} </Link>
+              <Link to={`/group/${channel.id}/${channel.name}`}>
+                {" "}
+                {channel.name}{" "}
+              </Link>
             </div>
           </div>
         ))}

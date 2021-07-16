@@ -3,14 +3,22 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { userContext } from "../context/userContext";
 
-const AllDms = () => {
-    const loggedInUser = useContext(userContext)[0];
-  
-  const [dms, setDms] = useState([]);
+const UserChannel = () => {
+
+//   const loggedInUser = useContext(userContext)[0];
+  const loggedInUser = {
+    "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
+    client: "tdluJrvdfrqEmGV_nCLpvQ",
+    expiry: 1626966033,
+    uid: "m1@m.com",
+    id: 31
+  };
+
+  const [channels, setChannels] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(dms);
+ 
 
   useEffect(() => {
     const requestOptions = {
@@ -18,7 +26,7 @@ const AllDms = () => {
       headers: loggedInUser
     };
 
-    fetch(`http://206.189.91.54//api/v1/users/recent`, requestOptions)
+    fetch(`http://206.189.91.54//api/v1/channel/owned`, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw Error("could not fetch the data for that resource");
@@ -26,14 +34,14 @@ const AllDms = () => {
         return response.json();
       })
       .then(data => {
-          const dms = data.data
-          setDms(dms);
+          const channels = data.data
+          setChannels(channels);
           setIsPending(false);
-          console.log(dms);
+          console.log(data);
       })
       .catch(error => {
-        // setIsPending(false);
-        // setError(error);
+        setIsPending(false);
+        setError(error);
       });
   }, []);
 
@@ -43,9 +51,9 @@ const AllDms = () => {
                 {error && <div>{error}</div>}
                 {isPending && <div>Loading...</div>}
                 {!isPending &&
-                    dms.map((dm) => (
-                        <StyledDMs key={dm.id}>
-                            <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}
+                    channels.map((channel) => (
+                        <StyledDMs key={channel.id}>
+                            <Link to={`/group/${channel.id}/${channel.name}`}>{channel.name}
                             </Link>
                         </StyledDMs>
                     ))}
@@ -54,7 +62,7 @@ const AllDms = () => {
   );
 };
 
-export default AllDms
+export default UserChannel
 
 const StyledDMsContainer= styled.div `
     display: flex;

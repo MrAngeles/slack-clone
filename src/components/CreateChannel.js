@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
-import ChannelList from "./ChannelList";
 import styled from "styled-components";
+import { userContext } from "../context/userContext";
 // import { Button } from "@material-ui/core";
 
-const loggedInUser = {
-  "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
-  client: "tdluJrvdfrqEmGV_nCLpvQ",
-  expiry: 1626966033,
-  uid: "m1@m.com",
-  id: 31,
-};
+// const loggedInUser = {
+//   "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
+//   client: "tdluJrvdfrqEmGV_nCLpvQ",
+//   expiry: 1626966033,
+//   uid: "m1@m.com",
+//   id: 31,
+// };
 
 function CreateChannel() {
+  const loggedInUser = useContext(userContext)[0];
   const [name, setName] = useState("");
 
   const config = {

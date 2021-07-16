@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { userContext } from "../context/userContext";
 
-const AllDms = () => {
+const AllDms = (props) => {
   const loggedInUser = useContext(userContext)[0];
 
   const [dms, setDms] = useState([]);
@@ -18,7 +18,7 @@ const AllDms = () => {
     };
 
     fetch(
-      `http://206.189.91.54//api/v1/messages?receiver_class=User&receiver_id=1`,
+      `http://206.189.91.54//api/v1/messages?receiver_class=${props.receiver_class}&receiver_id=${props.receiver_id}`,
       requestOptions
     )
       .then((response) => {
@@ -37,7 +37,7 @@ const AllDms = () => {
         setIsPending(false);
         setError(error);
       });
-  }, []);
+  }, [props.receiver_id]);
 
   return (
     <div>

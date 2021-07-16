@@ -6,10 +6,9 @@ import { userContext } from "../context/userContext";
 
 const url = "http://206.189.91.54//api/v1/messages";
 
-function ChatInput({ channelName, channelId, chatRef }) {
+function ChatInput(props) {
   const loggedInUser = useContext(userContext)[0];
   const [message, setMessage] = useState("");
-
   function handleMessageChange(e) {
     setMessage(e.target.value);
   }
@@ -21,9 +20,10 @@ function ChatInput({ channelName, channelId, chatRef }) {
       "content-type": "application/json",
       ...loggedInUser,
     },
+
     data: {
-      receiver_id: 1,
-      receiver_class: "User",
+      receiver_id: props.receiver_id,
+      receiver_class: props.receiver_class,
       body: message,
     },
   };
@@ -46,7 +46,7 @@ function ChatInput({ channelName, channelId, chatRef }) {
         id="body"
         value={message}
         autoComplete="off"
-        placeholder={`Send message to ${channelName}`}
+        placeholder={`Send message`}
       />
       <StyledSubmit type="submit">
         <SendIcon />

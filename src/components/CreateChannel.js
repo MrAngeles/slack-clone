@@ -60,7 +60,7 @@ function CreateChannel() {
           <AddChannelButton>
             <button type="submit">submit</button>
           </AddChannelButton>
-          <ChannelList />
+          {/* <ChannelList /> */}
         </form>
       </AddChannelContainer>
     </>

@@ -20,48 +20,24 @@ const url =
 
 function Chat(props) {
   const loggedInUser = useContext(userContext)[0];
-  const state = useContext(userContext)[0];
   console.log(props);
-  const channelName = props.match.params.name;
-  const channelId = props.match.params.id;
-
-  const config = {
-    method: "get",
-
-    url,
-    headers: {
-      "content-type": "application/json",
-      ...loggedInUser,
-      params: {
-        receiver_id: 1,
-        receiver_class: "User",
-        sender_idy: 1,
-      },
-    },
-  };
-
-  const retreiveMessageHandler = () => {
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    Chat();
-  };
+  const chatName = props.match.params.name;
+  const chatId = parseInt(props.match.params.id);
+  const path = props.match.path;
+  const isGroup = /group/.test(path);
+  const receiver_class = isGroup ? "Channel" : "User";
 
   return (
     <ChatContainer>
       <Header>
         <HeaderLeft>
           <PersonIcon />
-          <strong>{channelName}</strong>
+          <strong>{chatName}</strong>
           <StarBorderOutlinedIcon />
         </HeaderLeft>
       </Header>
-      <Messages />
-      <ChatInput />
+      <Messages receiver_id={chatId} receiver_class={receiver_class} />
+      <ChatInput receiver_id={chatId} receiver_class={receiver_class} />
     </ChatContainer>
   );
 }

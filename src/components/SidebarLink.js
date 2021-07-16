@@ -27,7 +27,7 @@ const SidebarOptionContainer = styled(Link)`
   cursor: pointer;
 
   > a {
-    color: white;
+    color: black !important;
     text-decoration: none;
     font-size: 20px;
   }

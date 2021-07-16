@@ -3,26 +3,28 @@ import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import ChatInput from "./ChatInput";
 import GroupIcon from "@material-ui/icons/Group";
-import { userContext } from "../context/userContext";
 
 function Chat(props) {
-  const state = useContext(userContext)[0];
   console.log(props);
-  const channelName = props.match.params.name;
-  const channelId = props.match.params.id;
+  const chatName = props.match.params.name;
+  const chatId = props.match.params.id;
+  const path = props.match.path;
+  const isGroup = /group/.test(path);
+  const receiver_class = isGroup ? "Channels" : "Users";
+
   return (
     <ChatContainer>
       <Header>
         <HeaderLeft>
           <GroupIcon />
-          <strong>{channelName}</strong>
+          <strong>{chatName}</strong>
           <StarBorderOutlinedIcon />
         </HeaderLeft>
       </Header>
 
-      <ChatMessages />
+      <ChatMessages receiver={chatId} receiver_class={receiver_class} />
 
-      <ChatInput />
+      <ChatInput receiver={chatId} receiver_class={receiver_class} />
     </ChatContainer>
   );
 }

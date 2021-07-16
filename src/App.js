@@ -14,7 +14,6 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
-import AllDms from "./components/AllDms";
 import { userContext } from "./context/userContext";
 import { getUser } from "./Utils/Common";
 import AllDms from "./components/AllDms";

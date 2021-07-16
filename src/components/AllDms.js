@@ -30,10 +30,10 @@ const AllDms = () => {
         return response.json();
       })
       .then(data => {
-          const dms = data.data
-          setDms(dms);
-          setIsPending(false);
-          console.log(dms);
+        const dms = data.data;
+        setDms(dms);
+        setIsPending(false);
+        console.log(dms);
       })
       .catch(error => {
         // setIsPending(false);
@@ -46,26 +46,13 @@ const AllDms = () => {
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {!isPending &&
-<<<<<<< HEAD
         dms.map(dm => (
           <div key={dm.id}>
             <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}</Link>
-=======
-        dms.map((dm) => (
-          <div key={dm.id}>
-            <Link to={`/dm/${dm.id}/${dm.uid}`}>{dm.uid}
-            </Link>
->>>>>>> 11843e345a743a6a9882d34f66f16e9d825190b1
           </div>
         ))}
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default AllDms;
-=======
-export default AllDms
-
-
->>>>>>> 11843e345a743a6a9882d34f66f16e9d825190b1

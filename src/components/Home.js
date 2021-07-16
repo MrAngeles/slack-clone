@@ -9,10 +9,10 @@ export default function Home() {
   console.log(five);
   return (
     <div>
-      <span>{state}</span>
+      {/* <span>{state}</span>
       <button onClick={() => dispatch("reset")}>reset</button>
       <button onClick={() => dispatch("increment")}>increment</button>
-      <button onClick={() => dispatch("decrement")}>decrement</button>
+      <button onClick={() => dispatch("decrement")}>decrement</button> */}
     </div>
   );
 }

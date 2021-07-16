@@ -9,7 +9,7 @@ function Registration(props) {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    password_confirmation: ""
+    password_confirmation: "",
   });
 
   const [error, setError] = useState(null);
@@ -21,28 +21,28 @@ function Registration(props) {
     history.push("/");
   };
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
 
     var data = {
       email: user.email,
       password: user.password,
-      password_confirmation: user.password_confirmation
+      password_confirmation: user.password_confirmation,
     };
 
     registrationUser(data)
-      .then(response => {
+      .then((response) => {
         history.push("/");
         return response;
       })
-      .then(result => console.log(result))
-      .catch(response => {
+      .then((result) => console.log(result))
+      .catch((response) => {
         setError(response.response.data.errors.full_messages[0]);
         return response;
       });
   };
 
-  const inputChangeHandler = e => {
+  const inputChangeHandler = (e) => {
     const newUser = { ...user };
     newUser[e.target.id] = e.target.value;
     setUser(newUser);
@@ -50,7 +50,7 @@ function Registration(props) {
 
   const errorStyle = {
     color: "red",
-    marginBottom: "20px"
+    marginBottom: "20px",
   };
 
   return (
@@ -66,19 +66,19 @@ function Registration(props) {
           <form onSubmit={submit}>
             <RegistrationInputContainer>
               <input
-                onChange={e => inputChangeHandler(e)}
+                onChange={(e) => inputChangeHandler(e)}
                 type="email"
                 placeholder="Email"
                 id="email"
               />
               <input
-                onChange={e => inputChangeHandler(e)}
+                onChange={(e) => inputChangeHandler(e)}
                 type="password"
                 placeholder="Password"
                 id="password"
               />
               <input
-                onChange={e => inputChangeHandler(e)}
+                onChange={(e) => inputChangeHandler(e)}
                 type="password"
                 placeholder="Confirm Password"
                 id="password_confirmation"

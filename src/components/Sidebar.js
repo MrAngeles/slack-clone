@@ -5,19 +5,14 @@ import CreateIcon from "@material-ui/icons/Create";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
 import InboxIcon from "@material-ui/icons/Inbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import AppsIcon from "@material-ui/icons/Apps";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarOption from "./SidebarOption";
 import ChannelList from "./ChannelList";
 import ListAllUsers from "./ListOfAllUsers";
-import CreateChannel from "./CreateChannel";
 import { userContext } from "../context/userContext";
-import SidebarLink from "./SidebarLink";
 
 function Sidebar() {
   //would typically use usestate but now we will use firebase hooks
@@ -52,30 +47,15 @@ function Sidebar() {
         <SidebarOption Icon={InsertCommentIcon} title="Thread" />
         <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
-        <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
-        <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/all-users"/>
-        <SidebarOption Icon={AppsIcon} title="Apps" />
-        <SidebarOption Icon={FileCopyIcon} title="File browser" />
+        <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/all-users" />
         <SidebarOption Icon={ExpandLessIcon} title="Show less" />
         <hr />
         <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
         {/* <CreateChannel /> */}
         <hr />
-        <SidebarOption
-          Icon={AddIcon}
-          to="/add-channel"
-          title="Add Channel"
-        />
+        <SidebarOption Icon={AddIcon} to="/add-channel" title="Add Channel" />
         <ChannelList />
-       
-        <SidebarLink id={31} title="Dog" />
-        <SidebarLink id={33} title="Cat" />
-        <SidebarLink id={34} title="Mouse" />
-        <ListAllUsers/> 
-
-        {/* {channels?.docs.map(doc => (
-        <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
-      ))} */}
+        <ListAllUsers />
       </SidebarContainer>
     </StyledDiv>
   );

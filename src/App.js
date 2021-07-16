@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useHistory
+  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
 import Login from "./components/Login";
@@ -40,20 +40,6 @@ function App() {
 
   return (
     <StyledApp>
-<<<<<<< HEAD
-      <Router>
-        <Header />
-        <Sidebar />
-        <Switch>
-          <Route path="/registration" component={Registration} />
-          <Route path="/carl-test" component={CreateChannel} />
-          <Route path="/login" component={Login} />
-          <Route path="/group" component={Chat} />
-          <Route path="/dm" component={Chat} />
-          <Route path="/" component={Home} exact />
-        </Switch>
-      </Router>
-=======
       <Header />
       <Sidebar />
       <Switch>
@@ -64,7 +50,6 @@ function App() {
         <Route path="/dm/:id/:name" component={Chat} />
         <Route path="/" component={Home} exact />
       </Switch>
->>>>>>> 29b4e497c91c8ea89c01ba5ca3538f1bc8f755a6
     </StyledApp>
   );
 }

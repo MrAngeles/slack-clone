@@ -51,10 +51,7 @@ const HeaderContainer = styled.div`
   background-color: #340d36;
   color: #d9d2da;
   padding: 0.5rem;
-<<<<<<< HEAD
-=======
   height: 8vh;
->>>>>>> 29b4e497c91c8ea89c01ba5ca3538f1bc8f755a6
 `;
 const HeaderSearch = styled.div`
   display: flex;

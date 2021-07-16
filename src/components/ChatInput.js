@@ -18,23 +18,24 @@ function ChatInput(props) {
     url,
     headers: {
       "content-type": "application/json",
-      ...loggedInUser,
+      ...loggedInUser
     },
 
     data: {
       receiver_id: props.receiver_id,
       receiver_class: props.receiver_class,
-      body: message,
-    },
+      body: message
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     axios(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
+      .then(response => {
+        props.changeFlag();
+        setMessage("");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   };

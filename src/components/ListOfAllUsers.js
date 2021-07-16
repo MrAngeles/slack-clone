@@ -32,14 +32,6 @@ function ListAllUsers() {
       });
   }, [allUsers]);
 
-<<<<<<< HEAD
-  const linkStyle = {
-    textDecoration: "none",
-    margin: 30
-  };
-=======
->>>>>>> 2a15f7b6944b382a8108acab5ccd3c4450d76414
-
   return (
     <div>
       {error && <div>{error}</div>}

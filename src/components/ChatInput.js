@@ -4,20 +4,11 @@ import SendIcon from "@material-ui/icons/Send";
 import axios from "axios";
 import { userContext } from "../context/userContext";
 
-// const loggedInUser = {
-//   "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
-//   client: "tdluJrvdfrqEmGV_nCLpvQ",
-//   expiry: 1626966033,
-//   uid: "m1@m.com",
-//   id: 31
-// };
-
 const url = "http://206.189.91.54//api/v1/messages";
 
-function ChatInput({ channelName, channelId, chatRef }) {
+function ChatInput(props) {
   const loggedInUser = useContext(userContext)[0];
   const [message, setMessage] = useState("");
-
   function handleMessageChange(e) {
     setMessage(e.target.value);
   }
@@ -27,22 +18,23 @@ function ChatInput({ channelName, channelId, chatRef }) {
     url,
     headers: {
       "content-type": "application/json",
-      ...loggedInUser
+      ...loggedInUser,
     },
+
     data: {
-      receiver_id: 1,
-      receiver_class: "User",
-      body: message
-    }
+      receiver_id: props.receiver_id,
+      receiver_class: props.receiver_class,
+      body: message,
+    },
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios(config)
-      .then(response => {
+      .then((response) => {
         console.log(JSON.stringify(response.data));
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -54,7 +46,7 @@ function ChatInput({ channelName, channelId, chatRef }) {
         id="body"
         value={message}
         autoComplete="off"
-        placeholder={`Send message to ${channelName}`}
+        placeholder={`Send message`}
       />
       <StyledSubmit type="submit">
         <SendIcon />

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import GroupIcon from "@material-ui/icons/Group";
+// import { enterRoom } from "../features/appSlice";
+import { db } from "../firebase";
+import PersonIcon from "@material-ui/icons/Person";
 import { useHistory } from "react-router-dom";
 function SidebarOption({ Icon, title, to }) {
   const history = useHistory();
@@ -13,7 +15,7 @@ function SidebarOption({ Icon, title, to }) {
       ) : (
         <SidebarOptionChannel>
           <span>
-            <GroupIcon style={{ marginBottom: 5 }} />
+            <PersonIcon style={{ marginBottom: 5 }} />
           </span>
           <p>{title}</p>
         </SidebarOptionChannel>

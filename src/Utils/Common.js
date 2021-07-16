@@ -7,7 +7,7 @@ export const getUser = () => {
   }
 };
 
-export const setUserSession = userData => {
+export const setUserSession = (userData) => {
   sessionStorage.setItem("user", JSON.stringify(userData));
   // sessionStorage.setItem("headers", JSON.stringify(headers))
 };

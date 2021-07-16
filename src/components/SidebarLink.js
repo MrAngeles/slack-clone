@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import GroupIcon from "@material-ui/icons/Group";
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import { useHistory, Link } from "react-router-dom";
 
 function SidebarLink({ title, id }) {
@@ -9,7 +10,9 @@ function SidebarLink({ title, id }) {
       <span>
         <GroupIcon style={{ marginBottom: 5 }} />
       </span>
-      <Link to={`/dm/${id}/${title}`}>{title}</Link>
+      <Link Icon={PeopleAltIcon} to={`/dm/${id}/${title}`}>
+        {title}
+      </Link>
     </SidebarOptionContainer>
   );
 }
@@ -24,7 +27,7 @@ const SidebarOptionContainer = styled(Link)`
   cursor: pointer;
 
   > a {
-    color: white;
+    color: black !important;
     text-decoration: none;
     font-size: 20px;
   }

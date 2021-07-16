@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useHistory
+  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
 import Login from "./components/Login";
@@ -14,6 +14,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
+import ListAllUsers from "./components/ListOfAllUsers";
 import { userContext } from "./context/userContext";
 import { getUser } from "./Utils/Common";
 import AllDms from "./components/AllDms";
@@ -51,6 +52,7 @@ function App() {
         <Route path="/group/:id/:name" component={Chat} />
         <Route path="/dm/:id/:name" component={Chat} />
         <Route path="/" component={Home} exact />
+        <Route path="/all-users" component={ListAllUsers}/>
       </Switch>
     </StyledApp>
   );

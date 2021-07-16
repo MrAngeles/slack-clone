@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 // import { enterRoom } from "../features/appSlice";
 import { db } from "../firebase";
-import GroupIcon from "@material-ui/icons/Group";
+import PersonIcon from "@material-ui/icons/Person";
 function SidebarOption({ Icon, title, addChannelOption, id }) {
   const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
       ) : (
         <SidebarOptionChannel>
           <span>
-            <GroupIcon style={{ marginBottom: 5 }} />
+            <PersonIcon style={{ marginBottom: 5 }} />
           </span>
           <p>{title}</p>
         </SidebarOptionChannel>

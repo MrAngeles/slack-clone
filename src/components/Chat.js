@@ -10,7 +10,7 @@ import ChatInput from "./ChatInput";
 // import UserContext from "../features/appSlice";
 import Message from "./Message";
 import axios from "axios";
-import GroupIcon from "@material-ui/icons/Group";
+import PersonIcon from "@material-ui/icons/Person";
 
 const loggedInUser = {
   "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
@@ -71,7 +71,7 @@ function Chat() {
     <ChatContainer>
       <Header>
         <HeaderLeft>
-          <GroupIcon />
+          <PersonIcon />
           <strong>Chat Name</strong>
           <StarBorderOutlinedIcon />
         </HeaderLeft>

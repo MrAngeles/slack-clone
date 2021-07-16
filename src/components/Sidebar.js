@@ -48,6 +48,7 @@ function Sidebar() {
           <CreateIcon />
         </SidebarHeader>
 
+        <SidebarOption Icon={InsertCommentIcon} title="All Dms" to="/all-dms" />
         <SidebarOption Icon={InsertCommentIcon} title="Thread" />
         <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
@@ -63,7 +64,6 @@ function Sidebar() {
         <SidebarOption
           Icon={AddIcon}
           to="/add-channel"
-          addChannelOption
           title="Add Channel"
         />
         <ChannelList />

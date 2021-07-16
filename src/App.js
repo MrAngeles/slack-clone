@@ -17,6 +17,7 @@ import Home from "./components/Home";
 import ListAllUsers from "./components/ListOfAllUsers";
 import { userContext } from "./context/userContext";
 import { getUser } from "./Utils/Common";
+import AllDms from "./components/AllDms";
 
 //first render
 function App() {
@@ -46,6 +47,7 @@ function App() {
       <Switch>
         <Route path="/registration" component={Registration} />
         <Route path="/add-channel" component={CreateChannel} />
+        <Route path="/all-dms" component={AllDms} />
         <Route path="/login" component={Login} />
         <Route path="/group/:id/:name" component={Chat} />
         <Route path="/dm/:id/:name" component={Chat} />

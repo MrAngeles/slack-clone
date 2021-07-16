@@ -1,27 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { enterRoom } from "../features/appSlice";
-import { db } from "../firebase";
 import GroupIcon from "@material-ui/icons/Group";
 import { useHistory } from "react-router-dom";
-function SidebarOption({ Icon, title, addChannelOption, id, to }) {
+function SidebarOption({ Icon, title, to }) {
   const history = useHistory();
-  const dispatch = useDispatch();
 
-  const addChannel = () => {
-    history.push(to);
-  };
-
-  //router push
-  const selectChannel = () => {
-    console.log(id);
-    history.push("/dm");
-  };
-
+  
   return (
     <SidebarOptionContainer
-      onClick={addChannelOption ? addChannel : selectChannel}
+      onClick={() => history.push(to)}
     >
       {Icon && <Icon style={{ padding: 10 }} />}
       {Icon ? (

@@ -17,6 +17,7 @@ import Home from "./components/Home";
 import AllDms from "./components/AllDms";
 import { userContext } from "./context/userContext";
 import { getUser } from "./Utils/Common";
+import AllDms from "./components/AllDms";
 
 //first render
 function App() {

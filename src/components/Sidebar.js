@@ -49,6 +49,7 @@ function Sidebar() {
         </SidebarHeader>
 
         <SidebarOption Icon={InsertCommentIcon} title="All Dms" to="/all-dms" />
+        <SidebarOption Icon={InsertCommentIcon} title="Thread" />
         <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
         <SidebarOption Icon={DraftsIcon} title="Saved items" />
         <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
@@ -60,12 +61,7 @@ function Sidebar() {
         <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
         {/* <CreateChannel /> */}
         <hr />
-        <SidebarOption
-          Icon={AddIcon}
-          to="/add-channel"
-          addChannelOption
-          title="Add Channel"
-        />
+        <SidebarOption Icon={AddIcon} to="/add-channel" title="Add Channel" />
         <ChannelList />
         <SidebarLink id={31} title="Dog" />
         <SidebarLink id={33} title="Cat" />

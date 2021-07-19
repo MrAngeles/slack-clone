@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import SidebarLink from "./SidebarLink";
 import { userContext } from "../context/userContext";
 
-function ListAllUsers() {
+function ListOfAllUsers() {
   const loggedInUser = useContext(userContext).userDetails[0];
   const usersListContext = useContext(userContext).usersLists[1];
 
@@ -53,4 +53,4 @@ function ListAllUsers() {
   );
 }
 
-export default ListAllUsers;
+export default ListOfAllUsers;

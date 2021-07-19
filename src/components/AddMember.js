@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import styled from "styled-components";
-import ListAllUsers from './ListOfAllUsers'
+import ListOfAllUsers from './ListOfAllUsers'
 import SidebarLink from './SidebarLink';
 import { userContext } from "../context/userContext";
 import axios from 'axios'

@@ -8,7 +8,7 @@ import { userContext } from "../context/userContext";
 
 function Login(props) {
   let history = useHistory();
-  const setContextUser = useContext(userContext)[1];
+  const setContextUser = useContext(userContext).userDetails[1];
   const [error, setError] = useState(null);
   const [user, setUser] = useState({
     email: "",
@@ -43,6 +43,7 @@ function Login(props) {
         history.push("/");
       })
       .catch(error => {
+        console.log(error)
         console.log(error.response.data.errors[0]);
         setError(error.response.data.errors[0]);
         return error;

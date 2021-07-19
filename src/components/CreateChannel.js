@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { userContext } from "../context/userContext";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import { Button } from "@material-ui/core";
 
 // const loggedInUser = {
@@ -13,7 +15,13 @@ import { userContext } from "../context/userContext";
 // };
 
 function CreateChannel() {
-  const loggedInUser = useContext(userContext)[0];
+
+  let history = useHistory();
+  const loggedInUser = useContext(userContext).userDetails[0];
+  const  usersLists = useContext(userContext).usersLists[0];
+
+  console.log(usersLists)
+
   const [name, setName] = useState("");
 
   const config = {
@@ -34,6 +42,7 @@ function CreateChannel() {
     axios(config)
       .then(response => {
         console.log(JSON.stringify(response.data));
+        history.push("/add-member")
       })
       .catch(error => {
         console.log(error);
@@ -59,7 +68,7 @@ function CreateChannel() {
             />
           </AddChannelInputContainer>
           <AddChannelButton>
-            <button type="submit">submit</button>
+           <button type="submit">Submit</button>
           </AddChannelButton>
           {/* <ChannelList /> */}
         </form>
@@ -76,14 +85,15 @@ const AddChannelButton = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 10px;
-  > button {
-    width: 15vh;
-    padding: 10px 0px 10px 0px;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: var(--slack-color);
-    color: white;
-  }
+    > button {
+      width: 15vh;
+      padding: 10px 0px 10px 0px;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: var(--slack-color);
+      color: white;
+    }
+ 
 `;
 
 const AddChannelInputContainer = styled.div`

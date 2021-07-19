@@ -3,16 +3,23 @@ import styled from "styled-components";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 
-function SidebarLink({ title, id }) {
+function SidebarLink({ title, id, colorUser }) {
   const styleLink = {
-    textDecoration: "none"
+    textDecoration: "none",
+    color: colorUser
   };
+
+  if(!colorUser){
+    styleLink.color = "#fff"
+  } else {
+    styleLink.color = colorUser
+  }
 
   return (
     <SidebarOptionContainer>
       <PersonIcon />
 
-      <Link to={`/dm/${id}/${title}`}>{title}</Link>
+      <Link to={`/dm/${id}/${title}`} style={styleLink}>{title}</Link>
     </SidebarOptionContainer>
   );
 }
@@ -30,14 +37,7 @@ const SidebarOptionContainer = styled.div`
 
   > a {
     color: white;
-    text-decoration: none;
-    display: block;
-    padding: 0.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 15px;
-    font-weight: 300;
+   
     /* font-size: 20px; */
   }
 

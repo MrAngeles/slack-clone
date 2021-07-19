@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SidebarLink from "./SidebarLink";
+import { userContext } from "../context/userContext";
 
-function ListAllUsers() {
-  let userInfo = JSON.parse(sessionStorage.user);
+function ListOfAllUsers() {
+  const loggedInUser = useContext(userContext).userDetails[0];
+  const usersListContext = useContext(userContext).usersLists[1];
 
   const [allUsers, setAllUsers] = useState(null);
   const [isPending, setIsPending] = useState(true);
@@ -11,7 +13,7 @@ function ListAllUsers() {
   useEffect(() => {
     const requestOptions = {
       method: "GET",
-      headers: userInfo
+      headers: loggedInUser
     };
 
     fetch(`http://206.189.91.54//api/v1/users`, requestOptions)
@@ -23,6 +25,7 @@ function ListAllUsers() {
       })
       .then(data => {
         setAllUsers(data);
+        usersListContext(data)
         setIsPending(false);
         setError(null);
       })
@@ -50,4 +53,4 @@ function ListAllUsers() {
   );
 }
 
-export default ListAllUsers;
+export default ListOfAllUsers;

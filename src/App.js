@@ -14,16 +14,17 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
-import ListAllUsers from "./components/ListOfAllUsers";
+import ListOfAllUsers from "./components/ListOfAllUsers";
 import { userContext } from "./context/userContext";
 import { getUser } from "./Utils/Common";
 import AllDms from "./components/AllDms";
 import UserChannel from "./components/UserChannel";
+import AddMember from "./components/AddMember";
 
 //first render
 function App() {
   const [isLoading, setLoading] = useState(true); //initial
-  const [contextUser, setContextUser] = useContext(userContext);
+  const [contextUser, setContextUser] = useContext(userContext).userDetails;
   const history = useHistory();
 
   useEffect(() => {
@@ -43,17 +44,20 @@ function App() {
 
   return (
     <StyledApp>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/registration" component={Registration} />
+      </Switch>
       <Header />
       <Sidebar />
       <Switch>
-        <Route path="/registration" component={Registration} />
         <Route path="/add-channel" component={CreateChannel} />
+        <Route path="/add-member" component={AddMember} />
         <Route path="/all-dms" component={AllDms} />
-        <Route path="/login" component={Login} />
         <Route path="/group/:id/:name" component={Chat} />
         <Route path="/dm/:id/:name" component={Chat} />
         <Route path="/owned-channels" component={UserChannel}/>
-        <Route path="/all-users" component={ListAllUsers}/>
+        {/* <Route path="/dm" component={ListOfAllUsers}/> */}
         <Route path="/" component={Home} exact />
       </Switch>
     </StyledApp>

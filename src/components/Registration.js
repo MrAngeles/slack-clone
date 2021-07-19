@@ -18,7 +18,7 @@ function Registration(props) {
 
   const signInHandleClick = () => {
     // props.setRegister(false)
-    history.push("/");
+    history.push("/login");
   };
 
   const submit = (e) => {
@@ -32,7 +32,7 @@ function Registration(props) {
 
     registrationUser(data)
       .then((response) => {
-        history.push("/");
+        history.push("/login");
         return response;
       })
       .then((result) => console.log(result))

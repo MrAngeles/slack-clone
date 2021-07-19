@@ -7,7 +7,7 @@ import { userContext } from "../context/userContext";
 const url = "http://206.189.91.54//api/v1/messages";
 
 function ChatInput(props) {
-  const loggedInUser = useContext(userContext)[0];
+  const loggedInUser = useContext(userContext).userDetails[0];
   const [message, setMessage] = useState("");
   function handleMessageChange(e) {
     setMessage(e.target.value);

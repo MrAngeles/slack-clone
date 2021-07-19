@@ -10,7 +10,7 @@ import { userContext } from "../context/userContext";
 
 function Header(props) {
   let history = useHistory();
-  const setContextUser = useContext(userContext)[1];
+  const setContextUser = useContext(userContext).userDetails[1];
   // const [user] = useAuthState(auth);
 
   const signOutHandleClick = () => {

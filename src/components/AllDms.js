@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { userContext } from "../context/userContext";
 
 const AllDms = () => {
-  const loggedInUser = useContext(userContext)[0];
+  const loggedInUser = useContext(userContext).userDetails[0];
 
   const [dms, setDms] = useState([]);
   const [isPending, setIsPending] = useState(true);

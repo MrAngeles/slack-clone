@@ -5,7 +5,7 @@ import { userContext } from "../context/userContext";
 
 const UserChannel = () => {
 
-//   const loggedInUser = useContext(userContext)[0];
+//   const loggedInUser = useContext(userContext).userDetails[0];
   const loggedInUser = {
     "access-token": "g3c29Tkg2MS23vDdiPiDeQ",
     client: "tdluJrvdfrqEmGV_nCLpvQ",

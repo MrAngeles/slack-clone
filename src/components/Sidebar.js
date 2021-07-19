@@ -11,12 +11,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarOption from "./SidebarOption";
 import ChannelList from "./ChannelList";
-import ListAllUsers from "./ListOfAllUsers";
+import ListOfAllUsers from "./ListOfAllUsers";
 import SidebarAction from "./SidebarAction";
 import { userContext } from "../context/userContext";
 
 function Sidebar() {
-  const contextUser = useContext(userContext)[0];
+  const contextUser = useContext(userContext).userDetails[0];
   const [userShown, showUsers] = useState(false);
   const [channelsShown, showChannels] = useState(false);
 
@@ -47,14 +47,14 @@ function Sidebar() {
         </SidebarHeader>
 
         <SidebarOption Icon={InsertCommentIcon} title="All Dms" to="/all-dms" />
-        <SidebarOption Icon={InsertCommentIcon} title="Thread" />
+        {/* <SidebarOption Icon={InsertCommentIcon} title="Thread" /> */}
         <SidebarOption
           Icon={InboxIcon}
           title="My Channels"
           to="/owned-channels"
         />
-        <SidebarOption Icon={DraftsIcon} title="Saved items" />
-        <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/all-users" />
+        {/* <SidebarOption Icon={DraftsIcon} title="Saved items" /> */}
+        <SidebarOption Icon={PeopleAltIcon} title="All Users" to="/dm" />
 
         <SidebarOption Icon={AddIcon} to="/add-channel" title="Add Channel" />
         <hr />
@@ -76,7 +76,7 @@ function Sidebar() {
         {/* <SidebarOption Icon={ExpandMoreIcon} title="Users" /> */}
         {/* <CreateChannel /> */}
         <hr />
-        {userShown && <ListAllUsers />}
+        {userShown && <ListOfAllUsers />}
       </SidebarContainer>
     </StyledDiv>
   );
